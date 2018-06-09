@@ -1,12 +1,10 @@
 # PQSE
 Pokemon Quest Save Editor (user friendly GUI)
 
-Tool to easily change the contents of a Pokemon Quest save-file.
+(WORK IN PROGRESS)
+Current Status: de/en/cryption of the save file works (Thanks to Thealexbarney https://github.com/Thealexbarney/PqSave)
 
-Current Progress: overall de/en/cryption works
-Next Steps: 1. read the save file 2. locate ticket value 3. change it
+Example work flow: Decrypt save, make changes in a hex editor, encrypt it
 
-(Project work-in-progress, big WiP)
 
 Always have a backup of your savefile!
-
