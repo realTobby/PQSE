@@ -26,11 +26,20 @@
             <Button x:Name="btn_selectLoad" Grid.Row="0" Grid.Column="1" Height="40" Content="..." Margin="10,0,0,0" Click="btn_selectLoad_Click"/>
             <Button x:Name="btn_read" Grid.Row="0" Grid.Column="2" Height="40" Content="Read" Margin="10,0,10,0" Click="btn_read_Click"/>
             <Button x:Name="btn_save" Grid.Row="0" Grid.Column="3" Height="40" Content="Save" Margin="10,0,10,0" Click="btn_save_Click"/>
-
-
-
-
         </Grid>
-        <TextBox x:Name="txtBlck_hex" Grid.Row="1" Text="{Binding HexDump}" TextWrapping="Wrap"/>
+
+        <Grid Name="body" Grid.Row="1">
+
+            <StackPanel>
+                <ComboBox Name="pokemons" SelectionChanged="pokemons_SelectionChanged"/>
+                <Label Name="information" />
+            </StackPanel>
+            
+            
+        </Grid>
+        
+        
+        
     </Grid>
+    
 </Window>

@@ -35,5 +35,12 @@ namespace PQSE_GUI
             get { return currentByteArray; }
             set { currentByteArray = value; OnPropertyChanged(nameof(CurrentByteArray)); }
         }
+        private SaveManager save;
+        public SaveManager Save
+        {
+            get { return save; }
+            set { save = value; OnPropertyChanged(nameof(Save)); }
+        }
+
     }
 }

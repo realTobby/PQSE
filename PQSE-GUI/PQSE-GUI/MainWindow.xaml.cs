@@ -1,8 +1,13 @@
 ﻿
 using Microsoft.Win32;
-using System.Collections.Generic;
+using System;
+using System.Drawing;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Interop;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace PQSE_GUI
 {
@@ -12,11 +17,13 @@ namespace PQSE_GUI
     public partial class MainWindow : Window
     {
         public ViewModel currentView;
+
         public MainWindow()
         {
             InitializeComponent();
             currentView = new ViewModel();
             this.DataContext = currentView;
+
         }
 
         private void btn_selectLoad_Click(object sender, RoutedEventArgs e)
@@ -42,24 +49,48 @@ namespace PQSE_GUI
         private void btn_read_Click(object sender, RoutedEventArgs e)
         {
             var encSave = File.ReadAllBytes(currentView.PathSelectedFile);
-            var read = Crypto.DecryptSave(encSave);
+            var decSave = Encryption.DecryptSave(encSave);
 
-            currentView.CurrentByteArray = read;
-            File.WriteAllBytes("latestDecryptedSave", currentView.CurrentByteArray);
 
-            List<string> hexVals = Crypto.ByteArrayToHex(read);
-            string convertedHex = "";
-            for (int i = 0; i < hexVals.Count; i++)
+            currentView.Save = new SaveManager(encSave);
+
+            foreach(var pokeData in currentView.Save.SerializeData.characterStorage.characterDataDictionary)
             {
-                convertedHex = convertedHex + hexVals[i];
+                var pokemon = pokeData.Value.data;
+
+                string name = "";
+                for(int i = 0; i < pokemon.name.Count; i++)
+                {
+                    name = name + pokemon.name[i];
+                }
+                pokemons.Items.Add(name);
             }
-            currentView.HexDump = convertedHex;
+
+            File.WriteAllBytes("latestSave.sav", currentView.Save.Export());
+
+            //currentView.CurrentByteArray = decSave;
+            //File.WriteAllBytes("latestDecryptedSave", currentView.CurrentByteArray);
+
+            //List<string> hexVals = Encryption.ByteArrayToHex(decSave);
+            //string convertedHex = "";
+            //for (int i = 0; i < hexVals.Count; i++)
+            //{
+            //    convertedHex = convertedHex + hexVals[i];
+            //}
+            //currentView.HexDump = convertedHex;
         }
 
         private void btn_save_Click(object sender, RoutedEventArgs e)
         {
             var decSave = currentView.CurrentByteArray;
-            File.WriteAllBytes("latestEncryptedSave", Crypto.EncryptSave(decSave));
+            File.WriteAllBytes("latestEncryptedSave", Encryption.EncryptSave(decSave));
         }
+
+        private void pokemons_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            int combIndx = pokemons.SelectedIndex;
+
+        }
+
     }
 }
