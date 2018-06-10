@@ -29,6 +29,13 @@ namespace PQSE_GUI
         }
         private void btnLoadSav_Click(object sender, RoutedEventArgs e)
         {
+            ResetAllFields();
+
+
+
+
+
+
             OpenFileDialog chooseSaveFileDialog = new OpenFileDialog();
             chooseSaveFileDialog.Filter = "All Files (*.*)|*.*";
             chooseSaveFileDialog.Multiselect = false;
@@ -43,6 +50,29 @@ namespace PQSE_GUI
             currentView.Save = new SaveManager(encSave);
 
             LoadEditable();
+        }
+
+        private void ResetAllFields()
+        {
+            txtBlueCommon.Clear();
+            txtBlueUncommon.Clear();
+            txtGreyCommon.Clear();
+            txtGreyUncommon.Clear();
+            txtLegend.Clear();
+            txtPlayerName.Clear();
+            txtPokeAttack.Clear();
+            txtPokeExp.Clear();
+            txtPokeHP.Clear();
+            txtPokeLevel.Clear();
+            txtPokeName.Clear();
+            txtPokeSpecies.Clear();
+            txtRare.Clear();
+            txtRedCommon.Clear();
+            txtRedUncommon.Clear();
+            txtTickets.Clear();
+            txtYellowCommon.Clear();
+            txtYellowUncommon.Clear();
+            pokemonList.Items.Clear();
         }
 
         private void LoadEditable()
@@ -63,7 +93,45 @@ namespace PQSE_GUI
                 pokemonList.Items.Add(pokeName);
             }
 
+            // items
+            foreach(var item in currentView.Save.SerializeData.itemStorage.datas)
+            {
+                string tmpVal = item.num.ToString();
 
+                switch(item.id)
+                {
+                    case Item.BlueCommon:
+                        txtBlueCommon.Text = tmpVal;
+                        break;
+                    case Item.BlueUnCommon:
+                        txtBlueUncommon.Text = tmpVal;
+                        break;
+                    case Item.GreyCommon:
+                        txtGreyCommon.Text = tmpVal;
+                        break;
+                    case Item.GreyUnCommon:
+                        txtGreyUncommon.Text = tmpVal;
+                        break;
+                    case Item.Legend:
+                        txtLegend.Text = tmpVal;
+                        break;
+                    case Item.Rare:
+                        txtRare.Text = tmpVal;
+                        break;
+                    case Item.RedCommon:
+                        txtRedCommon.Text = tmpVal;
+                        break;
+                    case Item.RedUnCommon:
+                        txtRedUncommon.Text = tmpVal;
+                        break;
+                    case Item.YellowCommon:
+                        txtYellowCommon.Text = tmpVal;
+                        break;
+                    case Item.YellowUnCommon:
+                        txtYellowUncommon.Text = tmpVal;
+                        break;
+                }
+            }
         }
 
         public string TransformPokeName(IList<char> name)
@@ -79,7 +147,6 @@ namespace PQSE_GUI
         private void pokemonList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             int selectedPokeIndx = pokemonList.SelectedIndex;
-
             var allPoke = currentView.Save.SerializeData.characterStorage.characterDataDictionary;
 
             int counter = 0;
@@ -93,15 +160,15 @@ namespace PQSE_GUI
                     txtPokeExp.Text = poke.Value.data.exp.ToString();
                     txtPokeHP.Text = poke.Value.data.hp.ToString();
                     txtPokeAttack.Text = poke.Value.data.attack.ToString();
+
+                    string iconpath = "icons/pokemon/" + poke.Value.data.monsterNo.ToString() + ".png" ;
+                    pokeIcon.Source = new BitmapImage(new Uri(iconpath, UriKind.Relative));
+
                     break;
                 }
                 counter++;
             }
-
-
-            
         }
-
 
         private void SaveEverything()
         {
@@ -110,7 +177,49 @@ namespace PQSE_GUI
             currentView.Save.SerializeData.playerData.name = txtPlayerName.Text;
             currentView.Save.SerializeData.misc.fsGiftTicketNum = Convert.ToInt32(txtTickets.Text);
 
+            // items
+            var itemStorageTMP = currentView.Save.SerializeData.itemStorage.datas;
+            foreach (var item in itemStorageTMP)
+            {
+                string tmpVal = "";
 
+                switch (item.id)
+                {
+                    case Item.BlueCommon:
+                        tmpVal = txtBlueCommon.Text;
+                        break;
+                    case Item.BlueUnCommon:
+                        tmpVal = txtBlueUncommon.Text;
+                        break;
+                    case Item.GreyCommon:
+                        tmpVal = txtGreyCommon.Text;
+                        break;
+                    case Item.GreyUnCommon:
+                        tmpVal = txtGreyUncommon.Text;
+                        break;
+                    case Item.Legend:
+                        tmpVal = txtLegend.Text;
+                        break;
+                    case Item.Rare:
+                        tmpVal = txtRare.Text;
+                        break;
+                    case Item.RedCommon:
+                        tmpVal = txtRedCommon.Text;
+                        break;
+                    case Item.RedUnCommon:
+                        tmpVal = txtRedUncommon.Text;
+                        break;
+                    case Item.YellowCommon:
+                        tmpVal = txtYellowCommon.Text;
+                        break;
+                    case Item.YellowUnCommon:
+                        tmpVal = txtYellowUncommon.Text;
+                        break;
+                }
+
+                currentView.Save.SerializeData.itemStorage.datas.Where(x => x.id == item.id).FirstOrDefault().num = (short)Convert.ToInt32(tmpVal);
+
+            }                   
         }
 
         private void btnExportSav_Click(object sender, RoutedEventArgs e)

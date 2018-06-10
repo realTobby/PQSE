@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PQSE_GUI"
         mc:Ignorable="d"
-        Title="PQSE-GUI" Height="450" Width="800">
+        Title="PQSE-GUI" Height="550" Width="800">
     <Grid x:Name="master">
 
         <TabControl>
@@ -50,9 +50,12 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="150" />
                     </Grid.ColumnDefinitions>
-                        <ListBox Name="pokemonList" SelectionChanged="pokemonList_SelectionChanged" Grid.Column="1"/>
+                    <ListBox Name="pokemonList" SelectionChanged="pokemonList_SelectionChanged" Grid.Column="1"/>
 
                     <StackPanel Grid.Column="0">
+
+                        <Image Name="pokeIcon" Width="64" Height="64"/>
+
                         <Label Content="Species/MonsterID/PokedexNumber:"/>
                         <TextBox Name="txtPokeSpecies"/>
 
@@ -73,9 +76,98 @@
 
                         <Button Name="btnSAve" Content="Write Pokemon Data" Click="savePokemonData" Margin="20" />
                     </StackPanel>
-                        
-
                 </Grid>
+            </TabItem>
+            <TabItem>
+            <TabItem.Header>
+                <TextBlock Text="Items"/>
+            </TabItem.Header>
+
+            <Grid Name="gridItems">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160"/>
+                        <ColumnDefinition Width="160"/>
+                        <ColumnDefinition Width="160"/>
+                        <ColumnDefinition Width="160"/>
+                        <ColumnDefinition Width="160"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Column="0" Grid.Row="0">
+                        <Image Source="icons/items/redCommon.png" Width="64" Height="64" />
+                        <Label Content="redCommon" />
+                        <TextBox Name="txtRedCommon"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Grid.Row="0">
+                        <Image Source="icons/items/blueCommon.png" Width="64" Height="64" />
+                        <Label Content="blueCommon" />
+                        <TextBox Name="txtBlueCommon"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" Grid.Row="0">
+                        <Image Source="icons/items/yellowCommon.png" Width="64" Height="64" />
+                        <Label Content="yellowCommon" />
+                        <TextBox Name="txtYellowCommon"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="3" Grid.Row="0">
+                        <Image Source="icons/items/greyCommon.png" Width="64" Height="64" />
+                        <Label Content="greyCommon" />
+                        <TextBox Name="txtGreyCommon"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="4" Grid.Row="0">
+                        <Image Source="icons/items/rare.png" Width="64" Height="64" />
+                        <Label Content="rare" />
+                        <TextBox Name="txtRare"/>
+                    </StackPanel>
+
+
+
+                    <StackPanel Grid.Column="0" Grid.Row="1">
+                        <Image Source="icons/items/redUncommon.png" Width="64" Height="64" />
+                        <Label Content="redUncommon" />
+                        <TextBox Name="txtRedUncommon"/>
+
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="1">
+                        <Image Source="icons/items/blueUncommon.png" Width="64" Height="64" />
+                        <Label Content="blueUncommon" />
+                        <TextBox Name="txtBlueUncommon"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" Grid.Row="1">
+                        <Image Source="icons/items/yellowUncommon.png" Width="64" Height="64" />
+                        <Label Content="yellowUncommon" />
+                        <TextBox Name="txtYellowUncommon"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="3" Grid.Row="1">
+                        <Image Source="icons/items/greyUncommon.png" Width="64" Height="64" />
+                        <Label Content="greyUncommon" />
+                        <TextBox Name="txtGreyUncommon"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="4" Grid.Row="1">
+                        <Image Source="icons/items/legend.png" Width="64" Height="64" />
+                        <Label Content="Legend" />
+                        <TextBox Name="txtLegend"/>
+                    </StackPanel>
+
+
+
+
+
+
+
+                    
+
+            </Grid>
 
             </TabItem>
         </TabControl>
