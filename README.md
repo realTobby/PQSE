@@ -6,7 +6,7 @@ Pokemon Quest Save Editor (user friendly GUI)
 
 
 Current Status: Reading Save file, making changes to it and exporting it works!
-Huge steps were made thanks to @TheAlexBarney
+Huge steps were made thanks to @TheAlexBarney and everyone else!
 
 (Misc Tab)
 
