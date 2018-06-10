@@ -2,13 +2,9 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Interop;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace PQSE_GUI
@@ -246,9 +242,14 @@ namespace PQSE_GUI
                 SaveEverything();
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 if (saveFileDialog.ShowDialog() == true)
-                    File.WriteAllBytes(saveFileDialog.FileName, currentView.Save.Export());
-
-                MessageBox.Show("Successfully exported .sav!");
+                {
+                    if(saveFileDialog.FileName != string.Empty)
+                    {
+                        File.WriteAllBytes(saveFileDialog.FileName, currentView.Save.Export());
+                        MessageBox.Show("Successfully exported .sav!");
+                    }
+                    
+                }
             }
             
         }
