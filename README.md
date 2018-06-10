@@ -18,4 +18,12 @@ Huge steps were made thanks to @TheAlexBarney and everyone else!
 
 
 
-Always have a backup of your savefile!
+Always have a backup of your savefile!#
+
+(HowTo Use)
+1. Dump your savefile, and bring it to your computer
+2. Load the .sav inside PQSE
+3. make changes to it!
+4. Export .sav
+5. Get the file back to your switch
+6. Overwrite the old save with the manipulated one
