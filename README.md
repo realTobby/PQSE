@@ -27,3 +27,8 @@ Always have a backup of your savefile!#
 4. Export .sav
 5. Get the file back to your switch
 6. Overwrite the old save with the manipulated one
+
+
+Credits:
+@TheAlexBarney - Code for En/De/cryption, De/Se/rialization of the savestrucutre and explaining!
+@GbaTemp users - very helpful information!
