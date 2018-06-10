@@ -2,9 +2,18 @@
 Pokemon Quest Save Editor (user friendly GUI)
 
 (WORK IN PROGRESS)
-Current Status: de/en/cryption of the save file works (Thanks to Thealexbarney https://github.com/Thealexbarney/PqSave)
+![alt text](https://github.com/xSillusx/PQSE/blob/master/screen.PNG)
 
-Example work flow: Decrypt save, make changes in a hex editor, encrypt it
+
+Current Status: Reading Save file, making changes to it and exporting it works!
+Huge steps were made thanks to @TheAlexBarney
+
+(Misc Tab)
+![alt text](https://github.com/xSillusx/PQSE/blob/master/screen2.PNG)
+
+(Pokemon Tab)
+![alt text](https://github.com/xSillusx/PQSE/blob/master/screen3.PNG)
+
 
 
 Always have a backup of your savefile!
