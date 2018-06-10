@@ -1,11 +1,9 @@
 # PQSE
 Pokemon Quest Save Editor (user friendly GUI)
 
+Interrested? Check the wiki: https://github.com/xSillusx/PQSE/wiki
+
 (WORK IN PROGRESS)
-
-Current Status: Reading Save file, making changes to it and exporting it works!
-Huge steps were made thanks to @TheAlexBarney and everyone else!
-
 Always have a backup of your savefile!
 
 Credits:
