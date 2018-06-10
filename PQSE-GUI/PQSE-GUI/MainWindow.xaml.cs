@@ -30,30 +30,29 @@ namespace PQSE_GUI
         private void btnLoadSav_Click(object sender, RoutedEventArgs e)
         {
             ResetAllFields();
-
-
-
-
-
-
             OpenFileDialog chooseSaveFileDialog = new OpenFileDialog();
             chooseSaveFileDialog.Filter = "All Files (*.*)|*.*";
             chooseSaveFileDialog.Multiselect = false;
             string selectedFile = "";
+            currentView.ShowingPath = selectedFile;
             if (chooseSaveFileDialog.ShowDialog() == true)
             {
                 selectedFile = chooseSaveFileDialog.FileName;
             }
-            currentView.PathSelectedFile = selectedFile;
+            
+            if (selectedFile != string.Empty)
+            {
+                currentView.PathSelectedFile = selectedFile;
+                var encSave = File.ReadAllBytes(currentView.PathSelectedFile);
+                currentView.Save = new SaveManager(encSave);
 
-            var encSave = File.ReadAllBytes(currentView.PathSelectedFile);
-            currentView.Save = new SaveManager(encSave);
-
-            LoadEditable();
+                LoadEditable();
+            }
         }
 
         private void ResetAllFields()
         {
+            currentView.Save = null;
             txtBlueCommon.Clear();
             txtBlueUncommon.Clear();
             txtGreyCommon.Clear();
@@ -242,12 +241,16 @@ namespace PQSE_GUI
 
         private void btnExportSav_Click(object sender, RoutedEventArgs e)
         {
-            SaveEverything();
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            if (saveFileDialog.ShowDialog() == true)
-                File.WriteAllBytes(saveFileDialog.FileName, currentView.Save.Export());
+            if(currentView.Save != null)
+            {
+                SaveEverything();
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                if (saveFileDialog.ShowDialog() == true)
+                    File.WriteAllBytes(saveFileDialog.FileName, currentView.Save.Export());
 
-            MessageBox.Show("Successfully exported .sav!");
+                MessageBox.Show("Successfully exported .sav!");
+            }
+            
         }
 
         private void savePokemonData(object sender, RoutedEventArgs e)
