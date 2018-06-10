@@ -5,39 +5,80 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PQSE_GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="PQSE-GUI" Height="450" Width="800">
     <Grid x:Name="master">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="65" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+        <TabControl>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Main"/>
+                </TabItem.Header>
 
-        <Grid x:Name="header" Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="400"/>
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+                <Grid Name="gridMain">
+                    <StackPanel>
+                        <Button Name="btnLoadSav" Content="Load .SAV" Height="25" Width="100" Margin="50" Click="btnLoadSav_Click"/>
+                        <Label Content="{Binding ShowingPath}" HorizontalAlignment="Center"/>
+                        <Button Name="btnExportSav" Content="Export .SAV" Height="25" Width="100" Margin="50" Click="btnExportSav_Click"/>
+                    </StackPanel>
+                    
+                </Grid>
+                
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Misc/Player"/>
+                </TabItem.Header>
 
-            <TextBox x:Name="txt_loadSave" Grid.Row="0" Grid.Column="0" Height="27" Text="{Binding PathSelectedFile}" Margin="10,0,0,0"/>
-            <Button x:Name="btn_selectLoad" Grid.Row="0" Grid.Column="1" Height="40" Content="..." Margin="10,0,0,0" Click="btn_selectLoad_Click"/>
-            <Button x:Name="btn_read" Grid.Row="0" Grid.Column="2" Height="40" Content="Read" Margin="10,0,10,0" Click="btn_read_Click"/>
-            <Button x:Name="btn_save" Grid.Row="0" Grid.Column="3" Height="40" Content="Save" Margin="10,0,10,0" Click="btn_save_Click"/>
-        </Grid>
+                <Grid Name="gridMisc">
+                    <StackPanel>
+                        <Label Content="Player name: "/>
+                        <TextBox Name="txtPlayerName"/>
 
-        <Grid Name="body" Grid.Row="1">
+                        <Label Content="Tickets: "/>
+                        <TextBox Name="txtTickets"/>
+                    </StackPanel>
+                </Grid>
 
-            <StackPanel>
-                <ComboBox Name="pokemons" SelectionChanged="pokemons_SelectionChanged"/>
-                <Label Name="information" />
-            </StackPanel>
-            
-            
-        </Grid>
-        
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Pokemon"/>
+                </TabItem.Header>
+
+                <Grid Name="gridPokemon">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="150" />
+                    </Grid.ColumnDefinitions>
+                        <ListBox Name="pokemonList" SelectionChanged="pokemonList_SelectionChanged" Grid.Column="1"/>
+
+                    <StackPanel Grid.Column="0">
+                        <Label Content="Species/MonsterID/PokedexNumber:"/>
+                        <TextBox Name="txtPokeSpecies"/>
+
+                        <Label Content="Name:" />
+                        <TextBox Name="txtPokeName"/>
+
+                        <Label Content="Level:" />
+                        <TextBox Name="txtPokeLevel"/>
+
+                        <Label Content="Exp:" />
+                        <TextBox Name="txtPokeExp"/>
+
+                        <Label Content="HP:" />
+                        <TextBox Name="txtPokeHP"/>
+
+                        <Label Content="Attack:" />
+                        <TextBox Name="txtPokeAttack" />
+
+                        <Button Name="btnSAve" Content="Write Pokemon Data" Click="savePokemonData" Margin="20" />
+                    </StackPanel>
+                        
+
+                </Grid>
+
+            </TabItem>
+        </TabControl>
         
         
     </Grid>

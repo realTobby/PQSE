@@ -19,7 +19,14 @@ namespace PQSE_GUI
         public string PathSelectedFile
         {
             get { return pathSelectedFile; }
-            set { pathSelectedFile = value; OnPropertyChanged(nameof(PathSelectedFile)); }
+            set { pathSelectedFile = value; OnPropertyChanged(nameof(PathSelectedFile)); ShowingPath = "Loaded .SAV-file:   " + value; }
+        }
+
+        private string showingPath;
+        public string ShowingPath
+        {
+            get { return showingPath; }
+            set { showingPath = value; OnPropertyChanged(nameof(ShowingPath)); }
         }
 
         private string hexDump;
