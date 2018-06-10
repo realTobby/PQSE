@@ -8,7 +8,7 @@ Pokemon Quest Save Editor (user friendly GUI)
 Always have a backup of your savefile!
 
 
-Interested? Check the wiki: https://github.com/xSillusx/PQSE/wiki
+Interested? Check the wiki for a How to: https://github.com/xSillusx/PQSE/wiki
 
 
 Credits:
