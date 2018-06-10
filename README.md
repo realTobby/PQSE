@@ -1,7 +1,7 @@
 # PQSE
 Pokemon Quest Save Editor (user friendly GUI)
 
-Interrested? Check the wiki: https://github.com/xSillusx/PQSE/wiki
+Interested? Check the wiki: https://github.com/xSillusx/PQSE/wiki
 
 (WORK IN PROGRESS)
 Always have a backup of your savefile!
