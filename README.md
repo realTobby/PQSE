@@ -2,20 +2,15 @@
 Pokemon Quest Save Editor (user friendly GUI)
 
 (WORK IN PROGRESS)
-![alt text](https://github.com/xSillusx/PQSE/blob/master/screen.PNG)
 
-
-Current Status: Reading Save file, making changes to it and exporting it works!
-Huge steps were made thanks to @TheAlexBarney
-
-(Misc Tab)
-
-![alt text](https://github.com/xSillusx/PQSE/blob/master/screen2.PNG)
-
-(Pokemon Tab)
-
-![alt text](https://github.com/xSillusx/PQSE/blob/master/screen3.PNG)
-
-
+![alt text](https://github.com/xSillusx/PQSE/blob/master/screen.png)
 
 Always have a backup of your savefile!
+
+
+Interested? Check the wiki: https://github.com/xSillusx/PQSE/wiki
+
+
+Credits:
+@TheAlexBarney - Code for En/De/cryption, De/Se/rialization of the savestrucutre and explaining!
+@GbaTemp users - very helpful information!
