@@ -66,10 +66,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EditPokemon.xaml.cs">
+      <DependentUpon>EditPokemon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Encryption.cs" />
     <Compile Include="SaveManager.cs" />
     <Compile Include="SaveTypes.cs" />
     <Compile Include="ViewModel.cs" />
+    <Page Include="EditPokemon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

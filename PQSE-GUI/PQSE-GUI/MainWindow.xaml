@@ -42,136 +42,16 @@
             </TabItem>
             <TabItem>
                 <TabItem.Header>
-                    <TextBlock Text="Pokemon"/>
+                    <TextBlock Text="Pokemon" />
                 </TabItem.Header>
+                <ScrollViewer>
+                    <WrapPanel Name="pokeFacesPanel" >
 
-                <Grid Name="gridPokemon">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="200" />
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="1">
-                        <Button Name="btnSAve" Content="Write Pokemon Data" Click="savePokemonData" Margin="20"/>
-                        <ListBox Name="pokemonList" SelectionChanged="pokemonList_SelectionChanged" />
-                    </StackPanel>
-                    
-                    
-                    <TabControl>
-                        <TabItem>
-                            <TabItem.Header>
-                                <TextBlock Text="General"/>
-                            </TabItem.Header>
-                            <StackPanel Grid.Column="0">
-
-                                <Image Name="pokeIcon" Width="64" Height="64"/>
-
-                                <Label Content="Species/MonsterID/PokedexNumber:"/>
-                                <TextBox Name="txtPokeSpecies"/>
-
-                                <Label Content="Name:" />
-                                <TextBox Name="txtPokeName"/>
-
-                                <Label Content="Level:" />
-                                <TextBox Name="txtPokeLevel"/>
-
-                                <Label Content="Exp:" />
-                                <TextBox Name="txtPokeExp"/>
-
-                                <Label Content="HP:" />
-                                <TextBox Name="txtPokeHP"/>
-
-                                <Label Content="Attack:" />
-                                <TextBox Name="txtPokeAttack" />
-                            </StackPanel>
-                        </TabItem>
-                        <TabItem>
-                            <TabItem.Header>
-                                <TextBlock Text="P-Stones"/>
-                            </TabItem.Header>
-                            <Grid>
-
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="25" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <CheckBox Name="checkUnlockPSlots" Content="Unlock all P-Slots for this Pokemon" IsChecked="False" Checked="checkUnlockPSlots_Checked" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
-
-                                <ComboBox Name="pStone0" Grid.Column="0" Grid.Row="1" Margin="40">
-                                    <ComboBoxItem>Attack</ComboBoxItem>
-                                    <ComboBoxItem>Health</ComboBoxItem>
-                                    <ComboBoxItem>Hybrid</ComboBoxItem>
-                                </ComboBox>
-
-                                <ComboBox Name="pStone1" Grid.Column="1" Grid.Row="1" Margin="40">
-                                    <ComboBoxItem>Attack</ComboBoxItem>
-                                    <ComboBoxItem>Health</ComboBoxItem>
-                                    <ComboBoxItem>Hybrid</ComboBoxItem>
-                                </ComboBox>
-
-                                <ComboBox Name="pStone2" Grid.Column="2" Grid.Row="1" Margin="40">
-                                    <ComboBoxItem>Attack</ComboBoxItem>
-                                    <ComboBoxItem>Health</ComboBoxItem>
-                                    <ComboBoxItem>Hybrid</ComboBoxItem>
-                                </ComboBox>
-
-                                <ComboBox Name="pStone3" Grid.Column="0" Grid.Row="2" Margin="40">
-                                    <ComboBoxItem>Attack</ComboBoxItem>
-                                    <ComboBoxItem>Health</ComboBoxItem>
-                                    <ComboBoxItem>Hybrid</ComboBoxItem>
-                                </ComboBox>
-
-                                <ComboBox Name="pStone4" Grid.Column="1" Grid.Row="2" Margin="40">
-                                    <ComboBoxItem>Attack</ComboBoxItem>
-                                    <ComboBoxItem>Health</ComboBoxItem>
-                                    <ComboBoxItem>Hybrid</ComboBoxItem>
-                                </ComboBox>
-
-                                <ComboBox Name="pStone5" Grid.Column="2" Grid.Row="2" Margin="40">
-                                    <ComboBoxItem>Attack</ComboBoxItem>
-                                    <ComboBoxItem>Health</ComboBoxItem>
-                                    <ComboBoxItem>Hybrid</ComboBoxItem>
-                                </ComboBox>
-
-                                <ComboBox Name="pStone6" Grid.Column="0" Grid.Row="3" Margin="40">
-                                    <ComboBoxItem>Attack</ComboBoxItem>
-                                    <ComboBoxItem>Health</ComboBoxItem>
-                                    <ComboBoxItem>Hybrid</ComboBoxItem>
-                                </ComboBox>
-
-                                <ComboBox Name="pStone7" Grid.Column="1" Grid.Row="3" Margin="40">
-                                    <ComboBoxItem>Attack</ComboBoxItem>
-                                    <ComboBoxItem>Health</ComboBoxItem>
-                                    <ComboBoxItem>Hybrid</ComboBoxItem>
-                                </ComboBox>
-
-                                <ComboBox Name="pStone8" Grid.Column="2" Grid.Row="3" Margin="40">
-                                    <ComboBoxItem>Attack</ComboBoxItem>
-                                    <ComboBoxItem>Health</ComboBoxItem>
-                                    <ComboBoxItem>Hybrid</ComboBoxItem>
-                                </ComboBox>
-
-
-
-                            </Grid>
-                            
-                        </TabItem>
-                        <TabItem>
-                            <TabItem.Header>
-                                <TextBlock Text="Skill-Stones"/>
-                            </TabItem.Header>
-
-                        </TabItem>
-                    </TabControl>
-                    
-                </Grid>
+                    </WrapPanel>
+                </ScrollViewer>
+                
+                
+                
             </TabItem>
             <TabItem>
             <TabItem.Header>
