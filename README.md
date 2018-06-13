@@ -9,8 +9,11 @@ Interested? Check the wiki for a How to: https://github.com/xSillusx/PQSE/wiki
 
 
 Credits:
-@TheAlexBarney - Code for En/De/cryption, De/Se/rialization of the savestrucutre and explaining!
 
-@GBATemp users - very helpful information!
+- @TheAlexBarney - Code for En/De/cryption, De/Se/rialization of the savestrucutre and explaining!
 
-@shearx from GBATemp - provided the maths behind the shiny status
+- @GBATemp users - very helpful information!
+
+- @shearx from GBATemp - provided the maths behind the shiny status
+
+- @kazzaluis - error finder / tester. Thanks to him the application gets more tougher.
