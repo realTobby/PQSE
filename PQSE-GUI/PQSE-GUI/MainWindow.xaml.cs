@@ -94,6 +94,8 @@ namespace PQSE_GUI
         private void ResetAllFields()
         {
             currentView.Save = null;
+
+            pokeFacesPanel.Children.Clear();
         }
 
         private void LoadEditable()
