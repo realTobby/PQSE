@@ -16,4 +16,4 @@ Credits:
 
 - @shearx from GBATemp - provided the maths behind the shiny status
 
-- @kazzaluis - error finder / tester. Thanks to him the application gets more tougher.
+- @kazzaluis - provides error fidning and testing, the application gets more tougher.
