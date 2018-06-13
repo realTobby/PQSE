@@ -65,8 +65,6 @@ namespace PQSE_GUI
 
                 pokeButton.Content = pokeFace;
 
-
-
                 pokeFacesPanel.Children.Add(pokeButton);
             }
         }
@@ -89,9 +87,6 @@ namespace PQSE_GUI
                 pokeFacesPanel.Children.Clear();
                 LoadPokemon();
                 MessageBox.Show("Successfully wrote data to: " + TransformPokeName(result.name));
-            } else if(editing.DialogResult.Value == false)
-            {
-                MessageBox.Show("The editing was cancelled. Changes reverted!");
             }
         }
 
