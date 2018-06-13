@@ -18,4 +18,6 @@ Credits:
 
 @TheAlexBarney - Code for En/De/cryption, De/Se/rialization of the savestrucutre and explaining!
 
-@GbaTemp users - very helpful information!
+@GBATemp users - very helpful information!
+
+@shearx from GBATemp - provided the maths behind the shiny status
