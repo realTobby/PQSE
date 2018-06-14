@@ -33,7 +33,8 @@
                     <TextBox x:Name="pokemonHealth"/>
 
                     <Label Content="Shiny:"/>
-                    <CheckBox Content="is shiny"/>
+                    <CheckBox Name="checkIfShiny" Content="is shiny" IsEnabled="false"/>
+                    <Button Name="setToShiny" Content="Set Shiny" Click="setToShiny_Click"/>
 
                 </StackPanel>
 
@@ -69,7 +70,7 @@
                     <ComboBox x:Name="pStone8" Grid.Column="2" Grid.Row="2" Height="50" Width="100" Margin="20"></ComboBox>
 
                 </Grid>
-               
+
             </TabItem>
         </TabControl>
     </StackPanel>

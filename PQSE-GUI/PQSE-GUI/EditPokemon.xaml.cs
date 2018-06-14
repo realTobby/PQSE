@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace PQSE_GUI
     public partial class EditPokemon : Window
     {
         private SaveCharacterData pokeResult;
+        private const uint shinyId = 3872211232;
+        private const uint shinyRareRandom = 1602156701;
 
         public EditPokemon(SaveCharacterData pokemon)
         {
@@ -65,6 +68,75 @@ namespace PQSE_GUI
             //pokemonRR.Text = pokeResult.rareRandom.ToString();
             //pokemonSeikaku.Text = pokeResult.seikaku.ToString();
 
+
+            // check if pokemon is shiny
+
+            checkIfShiny.IsChecked = CheckShinyStatus(pokeResult.id, pokeResult.rareRandom);
+
+
+        }
+
+        public bool CheckShinyStatus(uint inputId, uint inputrr)
+        {
+            uint pokeId = inputId;
+            uint pokeRR = inputrr;
+
+            var id = BitConverter.GetBytes(pokeId);
+            var rr = BitConverter.GetBytes(pokeRR);
+
+            byte[] p1Bytes = new byte[2];
+            p1Bytes[0] = id[0];
+            p1Bytes[1] = id[1];
+            p1Bytes[0] = Convert.ToByte(p1Bytes[0].ToString().PadLeft(16, '0'));
+            p1Bytes[1] = Convert.ToByte(p1Bytes[1].ToString().PadLeft(16, '0'));
+
+            byte[] p2Bytes = new byte[2];
+            p2Bytes[0] = id[2];
+            p2Bytes[1] = id[3];
+            //p2Bytes[0] = Convert.ToByte(p2Bytes[0].ToString().PadLeft(16, '0'));
+            //p2Bytes[1] = Convert.ToByte(p2Bytes[1].ToString().PadLeft(16, '0'));
+
+
+            byte[] p3Bytes = new byte[2];
+            p3Bytes[0] = rr[0];
+            p3Bytes[1] = rr[1];
+            //p3Bytes[0] = Convert.ToByte(p3Bytes[0].ToString().PadLeft(16, '0'));
+            //p3Bytes[1] = Convert.ToByte(p3Bytes[1].ToString().PadLeft(16, '0'));
+
+
+            byte[] p4Bytes = new byte[2];
+            p4Bytes[0] = rr[2];
+            p4Bytes[1] = rr[3];
+            //p4Bytes[0] = Convert.ToByte(p4Bytes[0].ToString().PadLeft(16, '0'));
+            //p4Bytes[1] = Convert.ToByte(p4Bytes[1].ToString().PadLeft(16, '0'));
+
+
+            var r1 = ((p1Bytes[0] << 8) + p1Bytes[1]) ^ ((p2Bytes[0] << 8) + p2Bytes[1]);
+            var r2 = r1 ^ ((p3Bytes[0] << 8) + p3Bytes[1]);
+            var r3 = r2 ^ ((p4Bytes[0] << 8) + p4Bytes[1]);
+
+            //BitArray b = new BitArray(BitConverter.GetBytes(r3));
+            //int[] bits = b.Cast<bool>().Select(bit => bit ? 1 : 0).ToArray();
+
+            byte[] bt = BitConverter.GetBytes(r3);
+
+            string strBin = string.Empty;
+            byte btindx = 0;
+            string strAllbin = string.Empty;
+
+            for (int i = 0; i < bt.Length; i++)
+            {
+                btindx = bt[i];
+
+                strBin = Convert.ToString(btindx, 2); // Convert from Byte to Bin
+                //strBin = strBin.PadLeft(4, '0');  // Zero Pad
+
+                strAllbin += strBin;
+            }
+
+            if (strAllbin.StartsWith("0111"))
+                return true;
+            return false;
         }
 
         /// <summary>
@@ -219,6 +291,31 @@ namespace PQSE_GUI
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
+        }
+
+        private void setToShiny_Click(object sender, RoutedEventArgs e)
+        {
+            Random rnd = new Random();
+            bool foundShinyVals = false;
+            uint shinyValId = 0;
+            uint shinyValRR = 0;
+
+            while(foundShinyVals == false)
+            {
+                uint randId = (uint)rnd.Next(Int32.MaxValue);
+                uint randRR = (uint)rnd.Next(999999999);
+                if (CheckShinyStatus(randId, randRR) == true)
+                {
+                    shinyValId = randId;
+                    shinyValRR = randRR;
+                    foundShinyVals = true;
+                    //MessageBox.Show("Found shiny value: " + System.Environment.NewLine + "id: " + randId + System.Environment.NewLine + "rareRandom: " + randRR);
+                }
+            }
+
+            pokeResult.id = shinyValId;
+            pokeResult.rareRandom = shinyValRR;
+            LoadStuff();
         }
     }
 }
