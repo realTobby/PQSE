@@ -104,6 +104,7 @@ namespace PQSE_GUI
 
             txtPlayerName.Text = currentView.Save.SerializeData.playerData.name;
             txtTickets.Text = currentView.Save.SerializeData.misc.fsGiftTicketNum.ToString();
+            txtBattery.Text = currentView.Save.SerializeData.misc.battery.ToString();
 
             // pokemon
 
@@ -166,6 +167,7 @@ namespace PQSE_GUI
 
             currentView.Save.SerializeData.playerData.name = txtPlayerName.Text;
             currentView.Save.SerializeData.misc.fsGiftTicketNum = Convert.ToInt32(txtTickets.Text);
+            currentView.Save.SerializeData.misc.battery = Convert.ToInt32(txtBattery.Text);
 
             // items
             var itemStorageTMP = currentView.Save.SerializeData.itemStorage.datas;
