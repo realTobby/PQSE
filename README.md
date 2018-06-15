@@ -17,3 +17,5 @@ Credits:
 - @shearx from GBATemp - provided the maths behind the shiny status
 
 - @kazzaluis - provided error finding and testing, the application got more tougher.
+
+- @AKCore for adding battery charges

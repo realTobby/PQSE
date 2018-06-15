@@ -78,7 +78,7 @@ namespace PQSE_GUI
 
 
         /// <summary>
-        /// Credit for ShinyCheck goes to shearx. Godly implemented. Godly explained. Real madlad.
+        /// HNUGE THANKS TO shearx! Provided this function, Maths, Explaination! Complete god.
         /// </summary>
         /// <param name="inputId"></param>
         /// <param name="inputrr"></param>
@@ -106,6 +106,7 @@ namespace PQSE_GUI
                     return false;
             }
             return true;
+
         }
 
         /// <summary>
@@ -217,30 +218,6 @@ namespace PQSE_GUI
 
         internal SaveCharacterData GetPokeResult()
         {
-            // name
-            // level
-            // exp
-            // monsterNo
-            // (shiny)
-            // attack
-            // health
-            // pstones
-            // (skill stones)
-            // skills
-
-            pokeResult.attack = Convert.ToInt32(pokemonAttack.Text);
-            pokeResult.exp = (uint)Convert.ToInt32(pokemonExp.Text);
-            //pokeResult.formNo
-            pokeResult.hp = Convert.ToInt32(pokemonHealth.Text);
-            //pokeResult.id
-            //pokeResult.isEvolve
-            pokeResult.level = (ushort)Convert.ToInt32(pokemonLevel.Text);
-            pokeResult.monsterNo = (ushort)Convert.ToInt32(comboAllPoke.SelectedIndex + 1);
-            pokeResult.name = pokemonName.Text.ToList();
-            SavePStoneTypes();
-            //pokeResult.rareRandom = (uint)Convert.ToInt32(pokemonRR.Text);
-            //pokeResult.seikaku = (byte)Convert.ToInt32(pokemonSeikaku.Text);
-            //pokeResult.trainingSkillCount
             return pokeResult;
         }
 
@@ -259,6 +236,22 @@ namespace PQSE_GUI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            pokeResult.attack = Convert.ToInt32(pokemonAttack.Text);
+            pokeResult.exp = (uint)Convert.ToInt32(pokemonExp.Text);
+            //pokeResult.formNo
+            pokeResult.hp = Convert.ToInt32(pokemonHealth.Text);
+            //pokeResult.id
+            //pokeResult.isEvolve
+            pokeResult.level = (ushort)Convert.ToInt32(pokemonLevel.Text);
+            pokeResult.monsterNo = (ushort)Convert.ToInt32(comboAllPoke.SelectedIndex + 1);
+            pokeResult.name = pokemonName.Text.ToList();
+            SavePStoneTypes();
+            //pokeResult.rareRandom = (uint)Convert.ToInt32(pokemonRR.Text);
+            //pokeResult.seikaku = (byte)Convert.ToInt32(pokemonSeikaku.Text);
+            //pokeResult.trainingSkillCount
+
+
+
             this.DialogResult = true;
         }
 
@@ -266,23 +259,18 @@ namespace PQSE_GUI
         {
             Random rnd = new Random();
             bool foundShinyVals = false;
-            uint shinyValId = 0;
             uint shinyValRR = 0;
 
-            while(foundShinyVals == false)
+            while (foundShinyVals == false)
             {
-                uint randId = (uint)rnd.Next(Int32.MaxValue);
-                uint randRR = (uint)rnd.Next(999999999);
-                if (CheckShinyStatus(randId, randRR) == true)
+                uint randRR = (uint)rnd.Next(int.MaxValue);
+                if (CheckShinyStatus(pokeResult.id, randRR) == true)
                 {
-                    shinyValId = randId;
                     shinyValRR = randRR;
                     foundShinyVals = true;
                     //MessageBox.Show("Found shiny value: " + System.Environment.NewLine + "id: " + randId + System.Environment.NewLine + "rareRandom: " + randRR);
                 }
             }
-
-            pokeResult.id = shinyValId;
             pokeResult.rareRandom = shinyValRR;
             LoadStuff();
         }
