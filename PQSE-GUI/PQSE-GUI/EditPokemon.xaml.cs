@@ -76,67 +76,36 @@ namespace PQSE_GUI
 
         }
 
+
+        /// <summary>
+        /// Credit for ShinyCheck goes to shearx. Godly implemented. Godly explained. Real madlad.
+        /// </summary>
+        /// <param name="inputId"></param>
+        /// <param name="inputrr"></param>
+        /// <returns></returns>
         public bool CheckShinyStatus(uint inputId, uint inputrr)
         {
-            uint pokeId = inputId;
-            uint pokeRR = inputrr;
+            string id = Convert.ToString(inputId, 2).PadLeft(32, '0');
+            string rr = Convert.ToString(inputrr, 2).PadLeft(32, '0');
 
-            var id = BitConverter.GetBytes(pokeId);
-            var rr = BitConverter.GetBytes(pokeRR);
+            string target = Convert.ToString(14, 2).PadLeft(16, '0');
+            BitArray targetVal = new BitArray(target.Select(s => s == '1').ToArray());
 
-            byte[] p1Bytes = new byte[2];
-            p1Bytes[0] = id[0];
-            p1Bytes[1] = id[1];
-            p1Bytes[0] = Convert.ToByte(p1Bytes[0].ToString().PadLeft(16, '0'));
-            p1Bytes[1] = Convert.ToByte(p1Bytes[1].ToString().PadLeft(16, '0'));
+            BitArray p1 = new BitArray(id.Substring(0, 16).Select(s => s == '1').ToArray());
+            BitArray p2 = new BitArray(id.Substring(16, 16).Select(s => s == '1').ToArray());
+            BitArray p3 = new BitArray(rr.Substring(0, 16).Select(s => s == '1').ToArray());
+            BitArray p4 = new BitArray(rr.Substring(16, 16).Select(s => s == '1').ToArray());
 
-            byte[] p2Bytes = new byte[2];
-            p2Bytes[0] = id[2];
-            p2Bytes[1] = id[3];
-            //p2Bytes[0] = Convert.ToByte(p2Bytes[0].ToString().PadLeft(16, '0'));
-            //p2Bytes[1] = Convert.ToByte(p2Bytes[1].ToString().PadLeft(16, '0'));
+            var r1 = p1.Xor(p2);
+            var r2 = r1.Xor(p3);
+            var r3 = r2.Xor(p4);
 
-
-            byte[] p3Bytes = new byte[2];
-            p3Bytes[0] = rr[0];
-            p3Bytes[1] = rr[1];
-            //p3Bytes[0] = Convert.ToByte(p3Bytes[0].ToString().PadLeft(16, '0'));
-            //p3Bytes[1] = Convert.ToByte(p3Bytes[1].ToString().PadLeft(16, '0'));
-
-
-            byte[] p4Bytes = new byte[2];
-            p4Bytes[0] = rr[2];
-            p4Bytes[1] = rr[3];
-            //p4Bytes[0] = Convert.ToByte(p4Bytes[0].ToString().PadLeft(16, '0'));
-            //p4Bytes[1] = Convert.ToByte(p4Bytes[1].ToString().PadLeft(16, '0'));
-
-
-            var r1 = ((p1Bytes[0] << 8) + p1Bytes[1]) ^ ((p2Bytes[0] << 8) + p2Bytes[1]);
-            var r2 = r1 ^ ((p3Bytes[0] << 8) + p3Bytes[1]);
-            var r3 = r2 ^ ((p4Bytes[0] << 8) + p4Bytes[1]);
-
-            //BitArray b = new BitArray(BitConverter.GetBytes(r3));
-            //int[] bits = b.Cast<bool>().Select(bit => bit ? 1 : 0).ToArray();
-
-            byte[] bt = BitConverter.GetBytes(r3);
-
-            string strBin = string.Empty;
-            byte btindx = 0;
-            string strAllbin = string.Empty;
-
-            for (int i = 0; i < bt.Length; i++)
+            for (var i = 0; i < r3.Length; i++)
             {
-                btindx = bt[i];
-
-                strBin = Convert.ToString(btindx, 2); // Convert from Byte to Bin
-                //strBin = strBin.PadLeft(4, '0');  // Zero Pad
-
-                strAllbin += strBin;
+                if (r3[i] != targetVal[i])
+                    return false;
             }
-
-            if (strAllbin.StartsWith("0111"))
-                return true;
-            return false;
+            return true;
         }
 
         /// <summary>
