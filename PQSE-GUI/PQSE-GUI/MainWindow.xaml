@@ -36,6 +36,10 @@
 
                         <Label Content="Tickets: "/>
                         <TextBox Name="txtTickets"/>
+
+                        <Label Content="Battery: "/>
+                        <TextBox Name="txtBattery"/>
+
                     </StackPanel>
                 </Grid>
 
