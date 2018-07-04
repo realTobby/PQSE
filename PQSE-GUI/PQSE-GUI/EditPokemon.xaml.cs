@@ -41,6 +41,10 @@ namespace PQSE_GUI
         }
         private void LoadStuff()
         {
+
+
+
+
             // make pokemon available
             for(int i = 1; i < 152; i++)
             {
@@ -58,6 +62,10 @@ namespace PQSE_GUI
                 comboAllPoke.SelectedIndex = pokeResult.monsterNo-1;
             }
 
+            // bingo stuff here
+            
+            //BingoTest();
+
             InitPStones();
 
             pokemonAttack.Text = pokeResult.attack.ToString();
@@ -69,13 +77,29 @@ namespace PQSE_GUI
             //pokemonSeikaku.Text = pokeResult.seikaku.ToString();
 
 
-            // check if pokemon is shiny
+            //InitAttackList();
 
+            // check if pokemon is shiny
             checkIfShiny.IsChecked = CheckShinyStatus(pokeResult.id, pokeResult.rareRandom);
 
 
         }
 
+        private void InitAttackList()
+        {
+            foreach(var item in pokeResult.potential.potentialSkill)
+            {
+                attacksOnThisPoke.Items.Add(item.skillID);
+            }
+            
+        }
+
+        private void BingoTest()
+        {
+            // Bingo bonus is pretty simple...just need to trial and error all the different statBonuses.
+            // after gathering all ids make a enum inside the SaveTypes.cs and maybe even PullRequest it to TheAlexBarneys Repository (maybe helpful?)
+            MessageBox.Show("This pokemon got the following bingo property: " + pokeResult.potential.bingoPropertyIndices);
+        }
 
         /// <summary>
         /// HNUGE THANKS TO shearx! Provided this function, Maths, Explaination! Complete god.

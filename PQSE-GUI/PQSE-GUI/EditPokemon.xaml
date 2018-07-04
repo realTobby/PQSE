@@ -72,6 +72,12 @@
                 </Grid>
 
             </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Attack(s)"/>
+                </TabItem.Header>
+                <ListBox Name="attacksOnThisPoke" />
+            </TabItem>
         </TabControl>
     </StackPanel>
 </Window>

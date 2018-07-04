@@ -40,13 +40,8 @@ namespace PQSE_GUI
             if (selectedFile != string.Empty)
             {
                 currentView.PathSelectedFile = selectedFile;
-                var encSave = File.ReadAllBytes(currentView.PathSelectedFile);
-                currentView.Save = new SaveManager(encSave);
-
+                currentView.Save = new SaveManager(File.ReadAllBytes(currentView.PathSelectedFile));
                 LoadEditable();
-                    
-                
-
             }
         }
 
@@ -64,9 +59,56 @@ namespace PQSE_GUI
                 pokeFace.Height = 48;
 
                 pokeButton.Content = pokeFace;
-
                 pokeFacesPanel.Children.Add(pokeButton);
             }
+
+            Button newPokemon = new Button();
+            CharacterStorage.ManageData freshpoke = new CharacterStorage.ManageData();
+            freshpoke.data = new SaveCharacterData();
+            freshpoke.data.attack = 1;
+            freshpoke.data.exp = 0;
+            freshpoke.data.name = "FreshlyAddedPokemon".ToList();
+            freshpoke.data.formNo = 0;
+            freshpoke.data.hp = 1;
+            freshpoke.data.id = 1;
+            freshpoke.data.isEvolve = false;
+            freshpoke.data.level = 1;
+            freshpoke.data.monsterNo = 1;
+            freshpoke.data.rareRandom = 6988666;
+
+            freshpoke.data.potential = new SaveCharacterPoteintialData();
+            freshpoke.data.potential.slotPropertyTypes = new List<sbyte>();
+
+            for(int i = 0; i < 9; i++)
+            {
+                freshpoke.data.potential.slotPropertyTypes.Add(2);
+            }
+
+
+
+
+            newPokemon.Tag = freshpoke.data;
+            newPokemon.Content = "+";
+            newPokemon.FontSize = 36;
+            newPokemon.Click += new RoutedEventHandler(addPoke);
+            pokeFacesPanel.Children.Add(newPokemon);
+        }
+
+        private void addPoke(object sender, RoutedEventArgs e)
+        {
+            Button pokeFace = sender as Button;
+            SaveCharacterData clickedPokemon = (SaveCharacterData)pokeFace.Tag;
+
+            
+
+            int keyPair = currentView.Save.SerializeData.characterStorage.characterDataDictionary.Count() + 1;
+
+
+            CharacterStorage.ManageData tmpNew = new CharacterStorage.ManageData();
+            tmpNew.data = clickedPokemon;
+
+            currentView.Save.SerializeData.characterStorage.characterDataDictionary.Add(keyPair, tmpNew);
+            EditPoke(sender, e);
         }
 
         private void EditPoke(object sender, RoutedEventArgs e)
@@ -96,15 +138,88 @@ namespace PQSE_GUI
             currentView.Save = null;
 
             pokeFacesPanel.Children.Clear();
+            stonePanel.Children.Clear();
         }
+
+        private void LoadStones()
+        {
+            foreach (var item in currentView.Save.SerializeData.potentialStorage.potentialDatas)
+            {
+                StoneData stone = item.Value as StoneData;
+
+                string baseLink = "icons/pStone/";
+
+                // get 45th byte and determine if attack or hp
+                switch(stone.stoneData[72])
+                {
+                    default:
+                        // if program lands here, the stone is a skill-stone not a passive stone
+                        baseLink = "icons/pStone/skill/cyan.png";
+
+
+
+
+
+
+                        break;
+                    case 2:
+                        baseLink = baseLink + "health/bronze.png";
+                        break;
+                    case 0:
+                        baseLink = baseLink + "attack/bronze.png";
+                        break;
+                }
+
+                Image stoneImg = new Image();
+                stoneImg.Source = new BitmapImage(new Uri(baseLink, UriKind.Relative));
+
+
+
+                Button stoneTmp = new Button();
+                stoneTmp.Content = stoneImg;
+                stoneTmp.Tag = stone;
+                stoneTmp.Width = 48;
+                stoneTmp.Height = 48;
+                stoneTmp.Click += new RoutedEventHandler(EditStone);
+
+                if(stone.stoneData.Contains(14) || stone.stoneData.Contains(28) || stone.stoneData.Contains(29) || stone.stoneData.Contains(40) || stone.stoneData.Contains(41) || stone.stoneData.Contains(48) || stone.stoneData.Contains(49))
+                    stonePanel.Children.Add(stoneTmp);
+
+            }
+        }
+
+        private void EditStone(object sender, RoutedEventArgs e)
+        {
+            Button stoneButton = sender as Button;
+            StoneData stone = (StoneData)stoneButton.Tag;
+
+
+            // DEBUG
+            string info = "";
+
+            foreach (var bite in stone.stoneData)
+            {
+                info = info + ";" + bite.ToString();
+            }
+
+            MessageBox.Show(info);
+
+        }
+
 
         private void LoadEditable()
         {
+            // stones
+
+            LoadStones();
+
             // misc
 
             txtPlayerName.Text = currentView.Save.SerializeData.playerData.name;
             txtTickets.Text = currentView.Save.SerializeData.misc.fsGiftTicketNum.ToString();
             txtBattery.Text = currentView.Save.SerializeData.misc.battery.ToString();
+            txtPokeStorage.Text = currentView.Save.SerializeData.characterStorage.dataCapacity.ToString();
+            txtStoneStorage.Text = currentView.Save.SerializeData.potentialStorage.dataCapacity.ToString();
 
             // pokemon
 
@@ -169,10 +284,14 @@ namespace PQSE_GUI
             currentView.Save.SerializeData.misc.fsGiftTicketNum = Convert.ToInt32(txtTickets.Text);
             currentView.Save.SerializeData.misc.battery = Convert.ToInt32(txtBattery.Text);
 
+            currentView.Save.SerializeData.characterStorage.dataCapacity = Convert.ToInt32(txtPokeStorage.Text);
+            currentView.Save.SerializeData.potentialStorage.dataCapacity = Convert.ToInt32(txtStoneStorage.Text);
+
             // items
             var itemStorageTMP = currentView.Save.SerializeData.itemStorage.datas;
             foreach (var item in itemStorageTMP)
             {
+
                 string tmpVal = "";
 
                 switch (item.id)
@@ -208,11 +327,21 @@ namespace PQSE_GUI
                         tmpVal = txtYellowUncommon.Text;
                         break;
                 }
-                currentView.Save.SerializeData.itemStorage.datas.Where(x => x.id == item.id).FirstOrDefault().num = (short)Convert.ToInt32(tmpVal);
+
+                if (currentView.Save.SerializeData.itemStorage.datas.Where(x => x.id == item.id).FirstOrDefault() != null)
+                    currentView.Save.SerializeData.itemStorage.datas.Where(x => x.id == item.id).FirstOrDefault().num = (short)Convert.ToInt32(tmpVal);
+                else
+                {
+                    ItemStorage.Core addItem = new ItemStorage.Core();
+                    addItem.id = item.id;
+                    addItem.isNew = true;
+                    addItem.num = (short)Convert.ToInt32(tmpVal);
+                    currentView.Save.SerializeData.itemStorage.datas.Add(addItem);
+                }
             }                   
         }
 
-        private void btnExportSav_Click(object sender, RoutedEventArgs e)
+            private void btnExportSav_Click(object sender, RoutedEventArgs e)
         {
             if(currentView.Save != null)
             {
@@ -291,6 +420,24 @@ namespace PQSE_GUI
             //        counter++;
             //    }
             //}
+        }
+        private void makeAllPotsIdle_click(object sender, RoutedEventArgs e)
+        {
+            IList<SaveCookingPot> potList = currentView.Save.SerializeData.visitCharacter.cookingPotList;
+            int tmpindx = 0;
+            foreach(SaveCookingPot item in currentView.Save.SerializeData.visitCharacter.cookingPotList)
+            {
+                SaveCookingPot editItem = item;
+
+                editItem.state = CookingPotState.Finish;
+                editItem.recipeID = 1;
+                editItem.cookingProgress = 12;
+                editItem.cookTime = 11;
+
+                potList[tmpindx] = editItem;
+                tmpindx++;
+
+            }
         }
     }
 }
