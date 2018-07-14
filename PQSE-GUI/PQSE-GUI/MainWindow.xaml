@@ -20,9 +20,9 @@
                         <Label Content="{Binding ShowingPath}" HorizontalAlignment="Center"/>
                         <Button Name="btnExportSav" Content="Export .SAV" Height="25" Width="100" Margin="50" Click="btnExportSav_Click"/>
                     </StackPanel>
-                    
+
                 </Grid>
-                
+
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -36,6 +36,15 @@
 
                         <Label Content="Tickets: "/>
                         <TextBox Name="txtTickets"/>
+
+                        <Label Content="Battery: "/>
+                        <TextBox Name="txtBattery"/>
+
+                        <Label Content="Poke-Storage capacity: "/>
+                        <TextBox Name="txtPokeStorage"/>
+
+                        <Label Content="Stone-Storage capacity: "/>
+                        <TextBox Name="txtStoneStorage"/>
                     </StackPanel>
                 </Grid>
 
@@ -49,16 +58,16 @@
 
                     </WrapPanel>
                 </ScrollViewer>
-                
-                
-                
+
+
+
             </TabItem>
             <TabItem>
-            <TabItem.Header>
-                <TextBlock Text="Items"/>
-            </TabItem.Header>
+                <TabItem.Header>
+                    <TextBlock Text="Items"/>
+                </TabItem.Header>
 
-            <Grid Name="gridItems">
+                <Grid Name="gridItems">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="160"/>
@@ -133,21 +142,19 @@
                         <Label Content="Legend" />
                         <TextBox Name="txtLegend"/>
                     </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Stones" />
+                </TabItem.Header>
+                <ScrollViewer>
+                    <WrapPanel Name="stonePanel" >
+                    </WrapPanel>
 
-
-
-
-
-
-
-                    
-
-            </Grid>
-
+                </ScrollViewer>
             </TabItem>
         </TabControl>
-        
-        
     </Grid>
     
 </Window>
