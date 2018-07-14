@@ -96,17 +96,34 @@ namespace PQSE_GUI
             BitArray p3 = new BitArray(rr.Substring(0, 16).Select(s => s == '1').ToArray());
             BitArray p4 = new BitArray(rr.Substring(16, 16).Select(s => s == '1').ToArray());
 
-            var r1 = p1.Xor(p2);
-            var r2 = r1.Xor(p3);
-            var r3 = r2.Xor(p4);
+            BitArray r1 = p1.Xor(p2);
+            BitArray r2 = r1.Xor(p3);
+            BitArray r3 = r2.Xor(p4);
 
-            for (var i = 0; i < r3.Length; i++)
+            var result = getIntFromBitArray(r3);
+
+            if (result < 16)
+                return true;
+            else
+                return false;
+        }
+
+        private static long getIntFromBitArray(BitArray bitArray)
+        {
+            var str = "";
+
+            for (int i = 0; i < bitArray.Count; i++)
             {
-                if (r3[i] != targetVal[i])
-                    return false;
+                if (bitArray[i])
+                    str += 1;
+                else
+                    str += 0;
             }
-            return true;
 
+            char[] MyChar = { '0' };
+            string newStr = str.TrimStart(MyChar);
+
+            return Convert.ToInt64(newStr, 2);
         }
 
         /// <summary>
