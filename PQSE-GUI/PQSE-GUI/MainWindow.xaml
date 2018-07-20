@@ -19,6 +19,10 @@
                         <Button Name="btnLoadSav" Content="Load .SAV" Height="25" Width="100" Margin="50" Click="btnLoadSav_Click"/>
                         <Label Content="{Binding ShowingPath}" HorizontalAlignment="Center"/>
                         <Button Name="btnExportSav" Content="Export .SAV" Height="25" Width="100" Margin="50" Click="btnExportSav_Click"/>
+
+                        <Label Content="If you didnt download this application from this url: https://github.com/xSillusx/PQSE/releases" HorizontalAlignment="Center" />
+                        <Label Content="Consider redownloading, the application you downloaded may include harmful changes!" HorizontalAlignment="Center" />
+
                     </StackPanel>
 
                 </Grid>

@@ -290,9 +290,6 @@ namespace PQSE_GUI
             //pokeResult.rareRandom = (uint)Convert.ToInt32(pokemonRR.Text);
             //pokeResult.seikaku = (byte)Convert.ToInt32(pokemonSeikaku.Text);
             //pokeResult.trainingSkillCount
-
-
-
             this.DialogResult = true;
         }
 

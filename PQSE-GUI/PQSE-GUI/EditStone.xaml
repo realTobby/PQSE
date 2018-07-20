@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="EditStone" Height="450" Width="800">
     <Grid>
+        <StackPanel>
+            <Button x:Name="saveStone" Click="saveStone_Click" Content="Save Stone" />
+
+
+            <Label Content="BasicValue: " />
+            <TextBox x:Name="txt_stoneVal" />
+
+
+        </StackPanel>
         
     </Grid>
 </Window>
