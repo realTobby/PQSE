@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Microsoft.VisualBasic;
 
 namespace PQSE_GUI
 {
@@ -17,6 +18,7 @@ namespace PQSE_GUI
     public partial class MainWindow : Window
     {
         public ViewModel currentView;
+        private static readonly string DEFAULT_KEY = "key.default";
 
         public MainWindow()
         {
@@ -41,7 +43,37 @@ namespace PQSE_GUI
             if (selectedFile != string.Empty)
             {
                 currentView.PathSelectedFile = selectedFile;
-                currentView.Save = new SaveManager(File.ReadAllBytes(currentView.PathSelectedFile));
+                try
+                {
+                    if (File.Exists(DEFAULT_KEY))
+                    {
+                        foreach (var line in File.ReadLines(DEFAULT_KEY))
+                        {
+                            if (line.Length == 16)
+                            {
+                                Encryption.key = line;
+                            }
+                        }
+                    }
+                    
+                    currentView.Save = new SaveManager(File.ReadAllBytes(currentView.PathSelectedFile));
+                }
+                catch (Exception)
+                {
+                    string key = Interaction.InputBox("key error", "please input right key", "");
+                    if (key.Length == 16)
+                    {
+                        Encryption.key = key;
+                        currentView.Save = new SaveManager(File.ReadAllBytes(currentView.PathSelectedFile));
+                        File.WriteAllText(DEFAULT_KEY, key);
+                    }
+                    else
+                    {
+                        MessageBox.Show("key error");
+                        return;
+                    }
+                }
+
                 LoadEditable();
             }
         }

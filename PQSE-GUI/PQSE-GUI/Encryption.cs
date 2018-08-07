@@ -10,7 +10,12 @@ namespace PQSE_GUI
 {
     public static class Encryption
     {
-        public static readonly byte[] Key = Encoding.UTF8.GetBytes("C7PxX4jPfPQ2SmzB");
+        public static string key
+        {
+            set { Key = Encoding.UTF8.GetBytes(value); }
+            get { return Encoding.UTF8.GetString(Key); }
+        }
+        private static byte[] Key = Encoding.UTF8.GetBytes("C7PxX4jPfPQ2SmzB");
         public static readonly byte[] Iv = Encoding.UTF8.GetBytes("nSdhdc3ecDDEM7fA");
         public static readonly byte[] ChecksumKey = Encoding.UTF8.GetBytes("chikuwa-hanpen");
         public static readonly int SaveLength = 0x80000;
