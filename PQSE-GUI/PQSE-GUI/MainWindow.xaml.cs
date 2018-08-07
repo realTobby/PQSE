@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace PQSE_GUI
@@ -36,7 +37,7 @@ namespace PQSE_GUI
             {
                 selectedFile = chooseSaveFileDialog.FileName;
             }
-            
+
             if (selectedFile != string.Empty)
             {
                 currentView.PathSelectedFile = selectedFile;
@@ -79,19 +80,19 @@ namespace PQSE_GUI
             freshpoke.data.potential = new SaveCharacterPoteintialData();
             freshpoke.data.potential.slotPropertyTypes = new List<sbyte>();
 
-            for(int i = 0; i < 9; i++)
+            for (int i = 0; i < 9; i++)
             {
                 freshpoke.data.potential.slotPropertyTypes.Add(2);
             }
 
 
 
-
-            newPokemon.Tag = freshpoke.data;
-            newPokemon.Content = "+";
-            newPokemon.FontSize = 36;
-            newPokemon.Click += new RoutedEventHandler(addPoke);
-            pokeFacesPanel.Children.Add(newPokemon);
+            // maybe some day this will be added lol
+            //newPokemon.Tag = freshpoke.data;
+            //newPokemon.Content = "+";
+            //newPokemon.FontSize = 36;
+            //newPokemon.Click += new RoutedEventHandler(addPoke);
+            //pokeFacesPanel.Children.Add(newPokemon);
         }
 
         private void addPoke(object sender, RoutedEventArgs e)
@@ -99,7 +100,7 @@ namespace PQSE_GUI
             Button pokeFace = sender as Button;
             SaveCharacterData clickedPokemon = (SaveCharacterData)pokeFace.Tag;
 
-            
+
 
             int keyPair = currentView.Save.SerializeData.characterStorage.characterDataDictionary.Count() + 1;
 
@@ -121,14 +122,14 @@ namespace PQSE_GUI
             EditPokemon editing = new EditPokemon(poke.Value.data);
 
             editing.ShowDialog();
-            
+
             if (editing.DialogResult.HasValue && editing.DialogResult.Value)
             {
                 result = editing.GetPokeResult();
                 currentView.Save.SerializeData.characterStorage.characterDataDictionary.Where(x => x.Value.data == clickedPokemon).FirstOrDefault().Value.data = result;
                 pokeFacesPanel.Children.Clear();
                 LoadPokemon();
-                MessageBox.Show("Successfully wrote data to: " + TransformPokeName(result.name));
+                MessageBox.Show("Successfully wrote data to Pokemon");
             }
         }
 
@@ -146,63 +147,177 @@ namespace PQSE_GUI
             foreach (var item in currentView.Save.SerializeData.potentialStorage.potentialDatas)
             {
                 StoneData stone = item.Value as StoneData;
+                Image stoneimg = new Image();
+                string baseLink = "icons/pStone/default.png";
 
-                string baseLink = "icons/pStone/";
-
-                // get 45th byte and determine if attack or hp
-                switch(stone.stoneData[72])
+                // determines the color fo stone
+                switch (stone.stoneData[56])
                 {
-                    default:
-                        // if program lands here, the stone is a skill-stone not a passive stone
-                        baseLink = "icons/pStone/skill/cyan.png";
-
-
-
-
-
-
-                        break;
-                    case 2:
-                        baseLink = baseLink + "health/bronze.png";
-                        break;
                     case 0:
-                        baseLink = baseLink + "attack/bronze.png";
+
+                        baseLink = "icons/pStone/template/basic.png";
+
+                        stoneimg.Source = DrawNumberOnStone(stone, baseLink);
+
+                        break;
+                    case 1:
+                        switch (stone.stoneData[44])
+                        {
+                            case 2:
+                                baseLink = "icons/pStone/categor/yellow.png";
+                                break;
+                            case 3:
+                                baseLink = "icons/pStone/categor/orange.png";
+                                break;
+                            case 4:
+                                baseLink = "icons/pStone/categor/purple.png";
+                                break;
+                            case 5:
+                                baseLink = "icons/pStone/categor/pink.png";
+                                break;
+                            case 6:
+                                baseLink = "icons/pStone/categor/cyan.png";
+                                break;
+                            case 7:
+                                baseLink = "icons/pStone/categor/green.png";
+                                break;
+                        }
+                        stoneimg.Source = new BitmapImage(new Uri(baseLink, UriKind.Relative));
+                        break;
+                    case 10:
+
+                        baseLink = "icons/pStone/template/brown.png";
+
+                        stoneimg.Source = DrawNumberOnStone(stone, baseLink);
+
+                        break;
+                    case 20:
+                        baseLink = "icons/pStone/template/silver.png";
+
+                        stoneimg.Source = DrawNumberOnStone(stone, baseLink);
+
+                        break;
+                    case 30:
+                        baseLink = "icons/pStone/template/gold.png";
+
+                        stoneimg.Source = DrawNumberOnStone(stone, baseLink);
+
                         break;
                 }
 
-                Image stoneImg = new Image();
-                stoneImg.Source = new BitmapImage(new Uri(baseLink, UriKind.Relative));
 
 
 
                 Button stoneTmp = new Button();
-                stoneTmp.Content = stoneImg;
+                stoneTmp.Content = stoneimg;
                 stoneTmp.Tag = stone;
                 stoneTmp.Width = 48;
                 stoneTmp.Height = 48;
                 stoneTmp.Click += new RoutedEventHandler(EditStone);
-
-                if(stone.stoneData.Contains(14) || stone.stoneData.Contains(28) || stone.stoneData.Contains(29) || stone.stoneData.Contains(40) || stone.stoneData.Contains(41) || stone.stoneData.Contains(48) || stone.stoneData.Contains(49))
-                    stonePanel.Children.Add(stoneTmp);
+                stonePanel.Children.Add(stoneTmp);
 
             }
         }
 
-        private void EditStone(object sender, RoutedEventArgs e)
+        private RenderTargetBitmap DrawNumberOnStone(StoneData stone, string imgLink)
         {
-            Button stoneButton = sender as Button;
-            StoneData stone = (StoneData)stoneButton.Tag;
+            int tmpCalc = stone.stoneData[93];
+            int result = stone.stoneData[92];
+            result = result + (tmpCalc * 256);
 
+            BitmapImage src = new BitmapImage();
+            src.BeginInit();
+            src.UriSource = new Uri(imgLink, UriKind.Relative);
+            src.CacheOption = BitmapCacheOption.OnLoad;
+            src.EndInit();
 
-            // DEBUG
-            string info = "";
-
-            foreach (var bite in stone.stoneData)
+            DrawingVisual dv = new DrawingVisual();
+            using (DrawingContext dc = dv.RenderOpen())
             {
-                info = info + ";" + bite.ToString();
+
+                dc.DrawImage(src, new Rect(0, 0, src.PixelWidth, src.PixelHeight));
+
+                Image tmpCate = new Image();
+                if (stone.stoneData[44] == 0)
+                {
+                    tmpCate.Source = new BitmapImage(new Uri(@"icons/pStone/categor/attack.png", UriKind.Relative));
+                    dc.DrawImage(tmpCate.Source, new Rect(74, 46, 96, 96));
+                }
+                if (stone.stoneData[44] == 1)
+                {
+                    tmpCate.Source = new BitmapImage(new Uri(@"icons/pStone/categor/defense.png", UriKind.Relative));
+                    dc.DrawImage(tmpCate.Source, new Rect(74, 46, 96, 96));
+                }
+                dc.DrawText(new FormattedText(result.ToString(), new System.Globalization.CultureInfo(""), FlowDirection.LeftToRight, new Typeface("Arial"), 70, Brushes.White, null), new Point(43, 150));
+                //dc.DrawRectangle(Brushes.White, null, new Rect(5, 23, 23, 6));
             }
 
-            MessageBox.Show(info);
+            RenderTargetBitmap rtb = new RenderTargetBitmap(src.PixelWidth, src.PixelHeight, 96, 96, PixelFormats.Pbgra32);
+            rtb.Render(dv);
+
+
+            return rtb;
+
+        }
+
+
+        private void EditStone(object sender, RoutedEventArgs e)
+        {
+            //Button stoneButton = sender as Button;
+            //StoneData stone = (StoneData)stoneButton.Tag;
+
+
+            //// DEBUG
+            //string info = "";
+
+            //foreach (var bite in stone.stoneData)
+            //{
+            //    info = info + ";" + bite.ToString();
+            //}
+
+
+            //int tmpCalc = stone.stoneData[93];
+            //int result = stone.stoneData[92];
+
+
+            //result = result + (tmpCalc * 256);
+
+
+            //MessageBox.Show("First val: " + stone.stoneData[93] + "  Second val: " + stone.stoneData[92] + System.Environment.NewLine + result);
+
+
+            Button stoneFace = sender as Button;
+            StoneData clickedStone = (StoneData)stoneFace.Tag;
+            StoneData stone = currentView.Save.SerializeData.potentialStorage.potentialDatas.Where(x => x.Value.stoneData == clickedStone.stoneData).FirstOrDefault().Value;
+            //MessageBox.Show("Clicked on: " + TransformPokeName(poke.Value.data.name));
+            StoneData result = null;
+
+            if (stone.stoneData[44] == 2 ||
+                stone.stoneData[44] == 3 ||
+                stone.stoneData[44] == 4 ||
+                stone.stoneData[44] == 5 ||
+                stone.stoneData[44] == 6 ||
+                stone.stoneData[44] == 7)
+            {
+                MessageBox.Show("Skill-Stone edits not yet implemented!");
+            }
+            else
+            {
+                EditStone editing = new EditStone(stone);
+                editing.ShowDialog();
+
+                if (editing.DialogResult.HasValue && editing.DialogResult.Value)
+                {
+                    result = editing.GetStoneResult();
+                    currentView.Save.SerializeData.potentialStorage.potentialDatas.Where(x => x.Value.stoneData == stone.stoneData).FirstOrDefault().Value.stoneData = result.stoneData;
+                    stonePanel.Children.Clear();
+                    LoadStones();
+                    MessageBox.Show("Successfully wrote data to Stone");
+                }
+            }
+
+
+
 
         }
 
@@ -230,7 +345,7 @@ namespace PQSE_GUI
             {
                 string tmpVal = item.num.ToString();
 
-                switch(item.id)
+                switch (item.id)
                 {
                     case Item.BlueCommon:
                         txtBlueCommon.Text = tmpVal;
@@ -340,26 +455,26 @@ namespace PQSE_GUI
                     addItem.num = (short)Convert.ToInt32(tmpVal);
                     currentView.Save.SerializeData.itemStorage.datas.Add(addItem);
                 }
-            }                   
+            }
         }
 
-            private void btnExportSav_Click(object sender, RoutedEventArgs e)
+        private void btnExportSav_Click(object sender, RoutedEventArgs e)
         {
-            if(currentView.Save != null)
+            if (currentView.Save != null)
             {
                 SaveEverything();
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 if (saveFileDialog.ShowDialog() == true)
                 {
-                    if(saveFileDialog.FileName != string.Empty)
+                    if (saveFileDialog.FileName != string.Empty)
                     {
                         File.WriteAllBytes(saveFileDialog.FileName, currentView.Save.Export());
                         MessageBox.Show("Successfully exported .sav!");
                     }
-                    
+
                 }
             }
-            
+
         }
 
         private void savePokemonData(object sender, RoutedEventArgs e)
@@ -427,7 +542,7 @@ namespace PQSE_GUI
         {
             IList<SaveCookingPot> potList = currentView.Save.SerializeData.visitCharacter.cookingPotList;
             int tmpindx = 0;
-            foreach(SaveCookingPot item in currentView.Save.SerializeData.visitCharacter.cookingPotList)
+            foreach (SaveCookingPot item in currentView.Save.SerializeData.visitCharacter.cookingPotList)
             {
                 SaveCookingPot editItem = item;
 
