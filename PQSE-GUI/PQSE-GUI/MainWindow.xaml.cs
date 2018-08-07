@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace PQSE_GUI
@@ -87,12 +86,12 @@ namespace PQSE_GUI
 
 
 
-            // maybe some day this will be added lol
-            //newPokemon.Tag = freshpoke.data;
-            //newPokemon.Content = "+";
-            //newPokemon.FontSize = 36;
-            //newPokemon.Click += new RoutedEventHandler(addPoke);
-            //pokeFacesPanel.Children.Add(newPokemon);
+
+            newPokemon.Tag = freshpoke.data;
+            newPokemon.Content = "+";
+            newPokemon.FontSize = 36;
+            newPokemon.Click += new RoutedEventHandler(addPoke);
+            pokeFacesPanel.Children.Add(newPokemon);
         }
 
         private void addPoke(object sender, RoutedEventArgs e)
@@ -129,7 +128,7 @@ namespace PQSE_GUI
                 currentView.Save.SerializeData.characterStorage.characterDataDictionary.Where(x => x.Value.data == clickedPokemon).FirstOrDefault().Value.data = result;
                 pokeFacesPanel.Children.Clear();
                 LoadPokemon();
-                MessageBox.Show("Successfully wrote data to Pokemon");
+                MessageBox.Show("Successfully wrote data to: " + TransformPokeName(result.name));
             }
         }
 
@@ -147,177 +146,63 @@ namespace PQSE_GUI
             foreach (var item in currentView.Save.SerializeData.potentialStorage.potentialDatas)
             {
                 StoneData stone = item.Value as StoneData;
-                Image stoneimg = new Image();
-                string baseLink = "icons/pStone/default.png";
 
-                // determines the color fo stone
-                switch(stone.stoneData[56])
+                string baseLink = "icons/pStone/";
+
+                // get 45th byte and determine if attack or hp
+                switch(stone.stoneData[72])
                 {
+                    default:
+                        // if program lands here, the stone is a skill-stone not a passive stone
+                        baseLink = "icons/pStone/skill/cyan.png";
+
+
+
+
+
+
+                        break;
+                    case 2:
+                        baseLink = baseLink + "health/bronze.png";
+                        break;
                     case 0:
-                        
-                            baseLink = "icons/pStone/template/basic.png";
-
-                        stoneimg.Source = DrawNumberOnStone(stone, baseLink);
-
-                        break;
-                    case 1:
-                        switch (stone.stoneData[44])
-                        {
-                            case 2:
-                                baseLink = "icons/pStone/categor/yellow.png";
-                                break;
-                            case 3:
-                                baseLink = "icons/pStone/categor/orange.png";
-                                break;
-                            case 4:
-                                baseLink = "icons/pStone/categor/purple.png";
-                                break;
-                            case 5:
-                                baseLink = "icons/pStone/categor/pink.png";
-                                break;
-                            case 6:
-                                baseLink = "icons/pStone/categor/cyan.png";
-                                break;
-                            case 7:
-                                baseLink = "icons/pStone/categor/green.png";
-                                break;
-                        }
-                        stoneimg.Source = new BitmapImage(new Uri(baseLink, UriKind.Relative));
-                        break;
-                    case 10:
-  
-                        baseLink = "icons/pStone/template/brown.png";
-
-                        stoneimg.Source = DrawNumberOnStone(stone, baseLink);
-
-                        break;
-                    case 20:
-                            baseLink = "icons/pStone/template/silver.png";
-
-                        stoneimg.Source = DrawNumberOnStone(stone, baseLink);
-
-                        break;
-                    case 30:
-                            baseLink = "icons/pStone/template/gold.png";
-
-                        stoneimg.Source = DrawNumberOnStone(stone, baseLink);
-
+                        baseLink = baseLink + "attack/bronze.png";
                         break;
                 }
 
-                
-                
+                Image stoneImg = new Image();
+                stoneImg.Source = new BitmapImage(new Uri(baseLink, UriKind.Relative));
+
+
 
                 Button stoneTmp = new Button();
-                stoneTmp.Content = stoneimg;
+                stoneTmp.Content = stoneImg;
                 stoneTmp.Tag = stone;
                 stoneTmp.Width = 48;
                 stoneTmp.Height = 48;
                 stoneTmp.Click += new RoutedEventHandler(EditStone);
-                stonePanel.Children.Add(stoneTmp);
+
+                if(stone.stoneData.Contains(14) || stone.stoneData.Contains(28) || stone.stoneData.Contains(29) || stone.stoneData.Contains(40) || stone.stoneData.Contains(41) || stone.stoneData.Contains(48) || stone.stoneData.Contains(49))
+                    stonePanel.Children.Add(stoneTmp);
 
             }
         }
-
-        private RenderTargetBitmap DrawNumberOnStone(StoneData stone, string imgLink)
-        {
-            int tmpCalc = stone.stoneData[93];
-            int result = stone.stoneData[92];
-            result = result + (tmpCalc * 256);
-
-            BitmapImage src = new BitmapImage();
-            src.BeginInit();
-            src.UriSource = new Uri(imgLink, UriKind.Relative);
-            src.CacheOption = BitmapCacheOption.OnLoad;
-            src.EndInit();
-
-            DrawingVisual dv = new DrawingVisual();
-            using (DrawingContext dc = dv.RenderOpen())
-            {
-                
-                dc.DrawImage(src, new Rect(0, 0, src.PixelWidth, src.PixelHeight));
-                
-                Image tmpCate = new Image();
-                if (stone.stoneData[44] == 0)
-                {
-                    tmpCate.Source = new BitmapImage(new Uri(@"icons/pStone/categor/attack.png", UriKind.Relative));
-                    dc.DrawImage(tmpCate.Source,new Rect(74,46,96,96));
-                }
-                if (stone.stoneData[44] == 1)
-                {
-                    tmpCate.Source = new BitmapImage(new Uri(@"icons/pStone/categor/defense.png", UriKind.Relative));
-                    dc.DrawImage(tmpCate.Source, new Rect(74, 46, 96, 96));
-                }
-                dc.DrawText(new FormattedText(result.ToString(), new System.Globalization.CultureInfo(""), FlowDirection.LeftToRight, new Typeface("Arial"), 70, Brushes.White, null), new Point(43, 150));
-                //dc.DrawRectangle(Brushes.White, null, new Rect(5, 23, 23, 6));
-            }
-
-            RenderTargetBitmap rtb = new RenderTargetBitmap(src.PixelWidth, src.PixelHeight, 96, 96, PixelFormats.Pbgra32);
-            rtb.Render(dv);
-
-
-            return rtb;
-
-        }
-
 
         private void EditStone(object sender, RoutedEventArgs e)
         {
-            //Button stoneButton = sender as Button;
-            //StoneData stone = (StoneData)stoneButton.Tag;
+            Button stoneButton = sender as Button;
+            StoneData stone = (StoneData)stoneButton.Tag;
 
 
-            //// DEBUG
-            //string info = "";
+            // DEBUG
+            string info = "";
 
-            //foreach (var bite in stone.stoneData)
-            //{
-            //    info = info + ";" + bite.ToString();
-            //}
-
-
-            //int tmpCalc = stone.stoneData[93];
-            //int result = stone.stoneData[92];
-
-
-            //result = result + (tmpCalc * 256);
-
-
-            //MessageBox.Show("First val: " + stone.stoneData[93] + "  Second val: " + stone.stoneData[92] + System.Environment.NewLine + result);
-
-
-            Button stoneFace = sender as Button;
-            StoneData clickedStone = (StoneData)stoneFace.Tag;
-            StoneData stone = currentView.Save.SerializeData.potentialStorage.potentialDatas.Where(x => x.Value.stoneData == clickedStone.stoneData).FirstOrDefault().Value;
-            //MessageBox.Show("Clicked on: " + TransformPokeName(poke.Value.data.name));
-            StoneData result = null;
-
-            if (stone.stoneData[44] == 2 ||
-                stone.stoneData[44] == 3 ||
-                stone.stoneData[44] == 4 ||
-                stone.stoneData[44] == 5 ||
-                stone.stoneData[44] == 6 ||
-                stone.stoneData[44] == 7)
+            foreach (var bite in stone.stoneData)
             {
-                MessageBox.Show("Skill-Stone edits not yet implemented!");
-            }
-            else
-            {
-                EditStone editing = new EditStone(stone);
-                editing.ShowDialog();
-
-                if (editing.DialogResult.HasValue && editing.DialogResult.Value)
-                {
-                    result = editing.GetStoneResult();
-                    currentView.Save.SerializeData.potentialStorage.potentialDatas.Where(x => x.Value.stoneData == stone.stoneData).FirstOrDefault().Value.stoneData = result.stoneData;
-                    stonePanel.Children.Clear();
-                    LoadStones();
-                    MessageBox.Show("Successfully wrote data to Stone");
-                }
+                info = info + ";" + bite.ToString();
             }
 
-            
-
+            MessageBox.Show(info);
 
         }
 
@@ -441,6 +326,8 @@ namespace PQSE_GUI
                     case Item.YellowUnCommon:
                         tmpVal = txtYellowUncommon.Text;
                         break;
+                    default:
+                        continue;
                 }
 
                 if (currentView.Save.SerializeData.itemStorage.datas.Where(x => x.id == item.id).FirstOrDefault() != null)
