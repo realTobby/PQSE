@@ -649,6 +649,14 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\pStone\slot\0.jpg" />
+    <Resource Include="icons\pStone\slot\0.png" />
+    <Resource Include="icons\pStone\slot\1.jpg" />
+    <Resource Include="icons\pStone\slot\1.png" />
+    <Resource Include="icons\pStone\slot\2.jpg" />
+    <Resource Include="icons\pStone\slot\2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>if not exist "$(ProjectDir)$(OutDir)icons\" md "$(ProjectDir)$(OutDir)icons\"
