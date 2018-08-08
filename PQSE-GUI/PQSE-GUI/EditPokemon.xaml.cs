@@ -174,13 +174,11 @@ namespace PQSE_GUI
                     //newOne.Content = "string";
                     pStone.Items.Add(newOne);
                 }
-                //Console.WriteLine(System.IO.File.ReadAllText("icons/pStone/slot/" + j + ".png"));
             }
 
             for (int i = 0; i < pStones.Length; i++)
             {
                 var pStone = pStones[i];
-                Console.WriteLine(pokeResult.potential.slotPropertyTypes[i]);
                 pStone.SelectedIndex = pokeResult.potential.slotPropertyTypes[i];
             }
         }

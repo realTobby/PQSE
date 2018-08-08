@@ -42,7 +42,7 @@ namespace PQSE_GUI
 
             if (selectedFile != string.Empty)
             {
-                currentView.PathSelectedFile = selectedFile;
+                
                 try
                 {
                     if (File.Exists(DEFAULT_KEY))
@@ -56,16 +56,27 @@ namespace PQSE_GUI
                         }
                     }
                     
-                    currentView.Save = new SaveManager(File.ReadAllBytes(currentView.PathSelectedFile));
+                    currentView.Save = new SaveManager(File.ReadAllBytes(selectedFile));
+                    currentView.PathSelectedFile = selectedFile;
                 }
                 catch (Exception)
                 {
+                    currentView.Save = null;
                     string key = Interaction.InputBox("key error", "please input right key", "");
                     if (key.Length == 16)
                     {
-                        Encryption.key = key;
-                        currentView.Save = new SaveManager(File.ReadAllBytes(currentView.PathSelectedFile));
-                        File.WriteAllText(DEFAULT_KEY, key);
+                        try
+                        {
+                            Encryption.key = key;
+                            currentView.Save = new SaveManager(File.ReadAllBytes(selectedFile));
+                            currentView.PathSelectedFile = selectedFile;
+                            File.WriteAllText(DEFAULT_KEY, key);
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("key error");
+                            return;
+                        }
                     }
                     else
                     {
