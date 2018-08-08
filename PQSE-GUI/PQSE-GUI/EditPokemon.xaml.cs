@@ -23,6 +23,11 @@ namespace PQSE_GUI
         private SaveCharacterData pokeResult;
         private const uint shinyId = 3872211232;
         private const uint shinyRareRandom = 1602156701;
+        private ComboBox[] pStones;
+        /// <summary>
+        /// Use global variable to prevent imgages from gc
+        /// </summary>
+        private Image[] slotImages=new Image[3];
 
         public EditPokemon(SaveCharacterData pokemon)
         {
@@ -42,11 +47,8 @@ namespace PQSE_GUI
         private void LoadStuff()
         {
 
-
-
-
             // make pokemon available
-            for(int i = 1; i < 152; i++)
+            for (int i = 1; i < 152; i++)
             {
                 StackPanel comboItem = new StackPanel();
                 Image pokeFace = new Image();
@@ -59,11 +61,11 @@ namespace PQSE_GUI
                 comboItem.Children.Add(pokeNumber);
                 comboItem.Children.Add(pokeFace);
                 comboAllPoke.Items.Add(comboItem);
-                comboAllPoke.SelectedIndex = pokeResult.monsterNo-1;
+                comboAllPoke.SelectedIndex = pokeResult.monsterNo - 1;
             }
 
             // bingo stuff here
-            
+
             //BingoTest();
 
             InitPStones();
@@ -87,11 +89,11 @@ namespace PQSE_GUI
 
         private void InitAttackList()
         {
-            foreach(var item in pokeResult.potential.potentialSkill)
+            foreach (var item in pokeResult.potential.potentialSkill)
             {
                 attacksOnThisPoke.Items.Add(item.skillID);
             }
-            
+
         }
 
         private void BingoTest()
@@ -155,106 +157,32 @@ namespace PQSE_GUI
         /// </summary>
         private void InitPStones()
         {
-            for (int i = 0; i < 3; i++)
+            pStones = new ComboBox[9] { pStone0, pStone1, pStone2, pStone3, pStone4, pStone5, pStone6, pStone7, pStone8 };
+
+            for (int j = 0; j < 3; j++)
             {
-                Image slotImage = new Image();
-                slotImage.Source = new BitmapImage(new Uri("icons/pStone/types/" + i + ".png", UriKind.Relative));
+                slotImages[j] = new Image();
+                Image slotImage = slotImages[j];
+                slotImage.Source = new BitmapImage(new Uri("icons/pStone/slot/" + j + ".png", UriKind.Relative));
 
-                ComboBoxItem newOne = new ComboBoxItem();
-                newOne.Content = slotImage;
-
-                pStone0.Items.Add(newOne);
-            }
-            for (int i = 0; i < 3; i++)
-            {
-                Image slotImage = new Image();
-                slotImage.Source = new BitmapImage(new Uri("icons/pStone/types/" + i + ".png", UriKind.Relative));
-
-                ComboBoxItem newOne = new ComboBoxItem();
-                newOne.Content = slotImage;
-
-                pStone1.Items.Add(newOne);
-            }
-            for (int i = 0; i < 3; i++)
-            {
-                Image slotImage = new Image();
-                slotImage.Source = new BitmapImage(new Uri("icons/pStone/types/" + i + ".png", UriKind.Relative));
-
-                ComboBoxItem newOne = new ComboBoxItem();
-                newOne.Content = slotImage;
-
-                pStone2.Items.Add(newOne);
-            }
-            for (int i = 0; i < 3; i++)
-            {
-                Image slotImage = new Image();
-                slotImage.Source = new BitmapImage(new Uri("icons/pStone/types/" + i + ".png", UriKind.Relative));
-
-                ComboBoxItem newOne = new ComboBoxItem();
-                newOne.Content = slotImage;
-
-                pStone3.Items.Add(newOne);
-            }
-            for (int i = 0; i < 3; i++)
-            {
-                Image slotImage = new Image();
-                slotImage.Source = new BitmapImage(new Uri("icons/pStone/types/" + i + ".png", UriKind.Relative));
-
-                ComboBoxItem newOne = new ComboBoxItem();
-                newOne.Content = slotImage;
-
-                pStone4.Items.Add(newOne);
-            }
-            for (int i = 0; i < 3; i++)
-            {
-                Image slotImage = new Image();
-                slotImage.Source = new BitmapImage(new Uri("icons/pStone/types/" + i + ".png", UriKind.Relative));
-
-                ComboBoxItem newOne = new ComboBoxItem();
-                newOne.Content = slotImage;
-
-                pStone5.Items.Add(newOne);
-            }
-            for (int i = 0; i < 3; i++)
-            {
-                Image slotImage = new Image();
-                slotImage.Source = new BitmapImage(new Uri("icons/pStone/types/" + i + ".png", UriKind.Relative));
-
-                ComboBoxItem newOne = new ComboBoxItem();
-                newOne.Content = slotImage;
-
-                pStone6.Items.Add(newOne);
-            }
-            for (int i = 0; i < 3; i++)
-            {
-                Image slotImage = new Image();
-                slotImage.Source = new BitmapImage(new Uri("icons/pStone/types/" + i + ".png", UriKind.Relative));
-
-                ComboBoxItem newOne = new ComboBoxItem();
-                newOne.Content = slotImage;
-
-                pStone7.Items.Add(newOne);
-            }
-            for (int i = 0; i < 3; i++)
-            {
-                Image slotImage = new Image();
-                slotImage.Source = new BitmapImage(new Uri("icons/pStone/types/" + i + ".png", UriKind.Relative));
-
-                ComboBoxItem newOne = new ComboBoxItem();
-                newOne.Content = slotImage;
-
-                pStone8.Items.Add(newOne);
+                for (int i = 0; i < pStones.Length; i++)
+                {
+                    var pStone = pStones[i];
+                    
+                    ComboBoxItem newOne = new ComboBoxItem();
+                    newOne.Content = slotImage;
+                    //newOne.Content = "string";
+                    pStone.Items.Add(newOne);
+                }
+                //Console.WriteLine(System.IO.File.ReadAllText("icons/pStone/slot/" + j + ".png"));
             }
 
-            pStone0.SelectedIndex = pokeResult.potential.slotPropertyTypes[0];
-            pStone1.SelectedIndex = pokeResult.potential.slotPropertyTypes[1];
-            pStone2.SelectedIndex = pokeResult.potential.slotPropertyTypes[2];
-            pStone3.SelectedIndex = pokeResult.potential.slotPropertyTypes[3];
-            pStone4.SelectedIndex = pokeResult.potential.slotPropertyTypes[4];
-            pStone5.SelectedIndex = pokeResult.potential.slotPropertyTypes[5];
-            pStone6.SelectedIndex = pokeResult.potential.slotPropertyTypes[6];
-            pStone7.SelectedIndex = pokeResult.potential.slotPropertyTypes[7];
-            pStone8.SelectedIndex = pokeResult.potential.slotPropertyTypes[8];
+            for (int i = 0; i < pStones.Length; i++)
+            {
+                var pStone = pStones[i];
+                Console.WriteLine(pokeResult.potential.slotPropertyTypes[i]);
+                pStone.SelectedIndex = pokeResult.potential.slotPropertyTypes[i];
+            }
         }
 
         internal SaveCharacterData GetPokeResult()
@@ -264,15 +192,10 @@ namespace PQSE_GUI
 
         private void SavePStoneTypes()
         {
-            pokeResult.potential.slotPropertyTypes[0] = (sbyte)pStone0.SelectedIndex;
-            pokeResult.potential.slotPropertyTypes[1] = (sbyte)pStone1.SelectedIndex;
-            pokeResult.potential.slotPropertyTypes[2] = (sbyte)pStone2.SelectedIndex;
-            pokeResult.potential.slotPropertyTypes[3] = (sbyte)pStone3.SelectedIndex;
-            pokeResult.potential.slotPropertyTypes[4] = (sbyte)pStone4.SelectedIndex;
-            pokeResult.potential.slotPropertyTypes[5] = (sbyte)pStone5.SelectedIndex;
-            pokeResult.potential.slotPropertyTypes[6] = (sbyte)pStone6.SelectedIndex;
-            pokeResult.potential.slotPropertyTypes[7] = (sbyte)pStone7.SelectedIndex;
-            pokeResult.potential.slotPropertyTypes[8] = (sbyte)pStone8.SelectedIndex;
+            for (int i = 0; i < pStones.Length; i++)
+            {
+                pokeResult.potential.slotPropertyTypes[i] = (sbyte)pStones[i].SelectedIndex;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -311,6 +234,11 @@ namespace PQSE_GUI
             }
             pokeResult.rareRandom = shinyValRR;
             LoadStuff();
+        }
+
+        private void pStone0_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
