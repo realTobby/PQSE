@@ -12,6 +12,7 @@ Interested? Check the wiki for a How to: https://github.com/xSillusx/PQSE/wiki
 
 
 Credits:
+- @xSillusx - The original author of this project!
 
 - @TheAlexBarney - Code for En/De/cryption, De/Se/rialization of the savestrucutre and explaining!
 
