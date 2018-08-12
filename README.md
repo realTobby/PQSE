@@ -1,6 +1,6 @@
 # PQSE
 
-**(!!! I stopped this project because I have no fun working on it anymore. Sorry to all that waited for new updates / features / bug fixes !!!)**
+**(!!! The original author stopped this project, but I want to update it !!!)**
 
 Pokemon Quest Save Editor (user friendly GUI)
 
