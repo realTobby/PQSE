@@ -4,6 +4,11 @@
 
 Pokemon Quest Save Editor (user friendly GUI)
 
+## The new things
+
++ Add the Android version support
++ Repair the problems of the disappearing of the image of pStones slots.
+
 (WORK IN PROGRESS)
 I am not responsible for any damage you do to your Switch or Save file. Use this program at your own risk.
 Always have a backup of your savefile!
