@@ -1,13 +1,7 @@
 # PQSE
 
-**(!!! The original author stopped this project, but I want to update it !!!)**
 
-Pokemon Quest Save Editor (user friendly GUI)
-
-## The new things
-
-+ Add the Android version support
-+ Repair the problems of the disappearing of the image of pStones slots.
+Pokemon Quest Save Editor
 
 (WORK IN PROGRESS)
 I am not responsible for any damage you do to your Switch or Save file. Use this program at your own risk.
@@ -17,14 +11,11 @@ Interested? Check the wiki for a How to: https://github.com/xSillusx/PQSE/wiki
 
 
 Credits:
-- @xSillusx - The original author of this project!
+- @xSillusx - Original Author
 
-- @TheAlexBarney - Code for En/De/cryption, De/Se/rialization of the savestrucutre and explaining!
+- @TheAlexBarney & @moosehunter - code for getting hands on the save structure
 
 - @GBATemp users - very helpful information!
 
-- @shearx from GBATemp - provided the maths behind the shiny status
+- @shearx, @kazzaluis, @AKCore, @pmsmall - provided help to improve the application
 
-- @kazzaluis - provided error finding and testing, the application got more tougher.
-
-- @AKCore for adding battery charges
