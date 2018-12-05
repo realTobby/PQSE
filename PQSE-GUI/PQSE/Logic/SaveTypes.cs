@@ -1,5 +1,4 @@
-﻿// ReSharper disable InconsistentNaming ClassNeverInstantiated.Global UnusedAutoPropertyAccessor.Global UnusedMember.Global
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ZeroFormatter;
 
 namespace PQSE
@@ -7,124 +6,187 @@ namespace PQSE
     [ZeroFormattable]
     public class CheckData
     {
-        [Index(0)] public virtual IList<byte> hashBytes { get; set; }
-        [Index(1)] public virtual int version { get; set; }
+        [Index(0)]
+        public virtual IList<byte> hashBytes { get; set; }
+        [Index(1)]
+        public virtual int version { get; set; }
     }
 
     [ZeroFormattable]
     public class SerializeData
     {
-        [Index(0)] public virtual CharacterStorage characterStorage { get; set; }
-        [Index(1)] public virtual BattleData battleData { get; set; }
-        [Index(2)] public virtual PotentialStorage potentialStorage { get; set; }
-        [Index(3)] public virtual ConfigData configData { get; set; }
-        [Index(4)] public virtual FlagWork flagWork { get; set; }
-        [Index(5)] public virtual ItemStorage itemStorage { get; set; }
-        [Index(6)] public virtual VisitCharacter visitCharacter { get; set; }
-        [Index(7)] public virtual PokemonMemory pokemonMemory { get; set; }
-        [Index(8)] public virtual Misc misc { get; set; }
-        [Index(9)] public virtual PlayerData playerData { get; set; }
-        [Index(10)] public virtual Time time { get; set; }
-        [Index(11)] public virtual Goods goods { get; set; }
-        [Index(12)] public virtual Cook cook { get; set; }
+        [Index(0)]
+        public virtual CharacterStorage characterStorage { get; set; }
+        [Index(1)]
+        public virtual BattleData battleData { get; set; }
+        [Index(2)]
+        public virtual PotentialStorage potentialStorage { get; set; }
+        [Index(3)]
+        public virtual ConfigData configData { get; set; }
+        [Index(4)]
+        public virtual FlagWork flagWork { get; set; }
+        [Index(5)]
+        public virtual ItemStorage itemStorage { get; set; }
+        [Index(6)]
+        public virtual VisitCharacter visitCharacter { get; set; }
+        [Index(7)]
+        public virtual PokemonMemory pokemonMemory { get; set; }
+        [Index(8)]
+        public virtual Misc misc { get; set; }
+        [Index(9)]
+        public virtual PlayerData playerData { get; set; }
+        [Index(10)]
+        public virtual Time time { get; set; }
+        [Index(11)]
+        public virtual Goods goods { get; set; }
+        [Index(12)]
+        public virtual Cook cook { get; set; }
     }
 
     [ZeroFormattable]
     public class CharacterStorage
     {
-        [Index(0)] public virtual ILazyDictionary<int, ManageData> characterDataDictionary { get; set; }
-        [Index(1)] public virtual int dataCapacity { get; set; }
+        [Index(0)]
+        public virtual ILazyDictionary<int, ManageData> characterDataDictionary { get; set; }
+        [Index(1)]
+        public virtual int dataCapacity { get; set; }
 
         [ZeroFormattable]
         public class ManageData
         {
-            [Index(0)] public virtual SaveCharacterData data { get; set; }
-            [Index(1)] public virtual bool isNew { get; set; }
-            [Index(2)] public virtual long timeTicks { get; set; }
+            [Index(0)]
+            public virtual SaveCharacterData data { get; set; }
+            [Index(1)]
+            public virtual bool isNew { get; set; }
+            [Index(2)]
+            public virtual long timeTicks { get; set; }
         }
     }
 
     [ZeroFormattable]
     public class SaveCharacterData
     {
-        [Index(0)] public virtual uint exp { get; set; }
-        [Index(1)] public virtual ushort monsterNo { get; set; }
-        [Index(2)] public virtual byte formNo { get; set; }
-        [Index(3)] public virtual ushort level { get; set; }
-        [Index(4)] public virtual int hp { get; set; }
-        [Index(5)] public virtual int attack { get; set; }
-        [Index(6)] public virtual IList<char> name { get; set; }
-        [Index(7)] public virtual byte seikaku { get; set; }
-        [Index(8)] public virtual uint id { get; set; }
-        [Index(9)] public virtual uint rareRandom { get; set; }
-        [Index(10)] public virtual SaveCharacterPoteintialData potential { get; set; }
-        [Index(11)] public virtual int trainingSkillCount { get; set; }
-        [Index(12)] public virtual bool isEvolve { get; set; }
+        [Index(0)]
+        public virtual uint exp { get; set; }
+        [Index(1)]
+        public virtual ushort monsterNo { get; set; }
+        [Index(2)]
+        public virtual byte formNo { get; set; }
+        [Index(3)]
+        public virtual ushort level { get; set; }
+        [Index(4)]
+        public virtual int hp { get; set; }
+        [Index(5)]
+        public virtual int attack { get; set; }
+        [Index(6)]
+        public virtual IList<char> name { get; set; }
+        [Index(7)]
+        public virtual byte seikaku { get; set; }
+        [Index(8)]
+        public virtual uint id { get; set; }
+        [Index(9)]
+        public virtual uint rareRandom { get; set; }
+        [Index(10)]
+        public virtual SaveCharacterPoteintialData potential { get; set; }
+        [Index(11)]
+        public virtual int trainingSkillCount { get; set; }
+        [Index(12)]
+        public virtual bool isEvolve { get; set; }
     }
 
     [ZeroFormattable]
     public class SaveCharacterPoteintialData
     {
-        [Index(0)] public virtual ushort activeSlots { get; set; }
-        [Index(1)] public virtual IList<short> attachStoneStorageID { get; set; }
-        [Index(2)] public virtual IList<short> attachSkillStoneStorageID { get; set; }
-        [Index(3)] public virtual sbyte nextActivateSlotIndex { get; set; }
-        [Index(4)] public virtual float nextSlotProgress { get; set; }
-        [Index(5)] public virtual uint bingoPropertyIndices { get; set; }
-        [Index(6)] public virtual IList<sbyte> slotPropertyTypes { get; set; }
-        [Index(7)] public virtual IList<SavePotentialSkillData> potentialSkill { get; set; }
+        [Index(0)]
+        public virtual ushort activeSlots { get; set; }
+        [Index(1)]
+        public virtual IList<short> attachStoneStorageID { get; set; }
+        [Index(2)]
+        public virtual IList<short> attachSkillStoneStorageID { get; set; }
+        [Index(3)]
+        public virtual sbyte nextActivateSlotIndex { get; set; }
+        [Index(4)]
+        public virtual float nextSlotProgress { get; set; }
+        [Index(5)]
+        public virtual uint bingoPropertyIndices { get; set; }
+        [Index(6)]
+        public virtual IList<sbyte> slotPropertyTypes { get; set; }
+        [Index(7)]
+        public virtual IList<SavePotentialSkillData> potentialSkill { get; set; }
     }
 
     [ZeroFormattable]
     public class SavePotentialSkillData
     {
-        [Index(0)] public virtual sbyte slotIndex { get; set; }
-        [Index(1)] public virtual ushort skillID { get; set; }
+        [Index(0)]
+        public virtual sbyte slotIndex { get; set; }
+        [Index(1)]
+        public virtual ushort skillID { get; set; }
     }
 
     [ZeroFormattable]
     public class BattleData
     {
-        [Index(0)] public virtual IList<FormationData> formationDatas { get; set; }
-        [Index(1)] public virtual int selectIndex { get; set; }
-        [Index(2)] public virtual int openIndex { get; set; }
-        [Index(3)] public virtual ILazyDictionary<int, DungeonHighScore> stageHighScoreDictionary { get; set; }
-        [Index(4)] public virtual ChallengeDungeon challengeDungeon { get; set; }
-        [Index(5)] public virtual int aroundCount { get; set; }
-        [Index(6)] public virtual BattleBreakData battleBreakData { get; set; }
+        [Index(0)]
+        public virtual IList<FormationData> formationDatas { get; set; }
+        [Index(1)]
+        public virtual int selectIndex { get; set; }
+        [Index(2)]
+        public virtual int openIndex { get; set; }
+        [Index(3)]
+        public virtual ILazyDictionary<int, DungeonHighScore> stageHighScoreDictionary { get; set; }
+        [Index(4)]
+        public virtual ChallengeDungeon challengeDungeon { get; set; }
+        [Index(5)]
+        public virtual int aroundCount { get; set; }
+        [Index(6)]
+        public virtual BattleBreakData battleBreakData { get; set; }
     }
 
     [ZeroFormattable]
     public class FormationData
     {
-        [Index(0)] public virtual IList<MemberData> memberDatas { get; set; }
+        [Index(0)]
+        public virtual IList<MemberData> memberDatas { get; set; }
 
         [ZeroFormattable]
         public class MemberData
         {
-            [Index(0)] public virtual int storageIndex { get; set; }
+            [Index(0)]
+            public virtual int storageIndex { get; set; }
         }
     }
 
     [ZeroFormattable]
     public class DungeonHighScore
     {
-        [Index(0)] public virtual IList<SaveCharacterData> teamMembers { get; set; }
-        [Index(1)] public virtual int teamPower { get; set; }
-        [Index(2)] public virtual int stageLevel { get; set; }
-        [Index(3)] public virtual float clearSecond { get; set; }
+        [Index(0)]
+        public virtual IList<SaveCharacterData> teamMembers { get; set; }
+        [Index(1)]
+        public virtual int teamPower { get; set; }
+        [Index(2)]
+        public virtual int stageLevel { get; set; }
+        [Index(3)]
+        public virtual float clearSecond { get; set; }
     }
 
     [ZeroFormattable]
     public class ChallengeDungeon
     {
-        [Index(0)] public virtual DungeonID dungeonID { get; set; }
-        [Index(1)] public virtual int stageNum { get; set; }
-        [Index(2)] public virtual Work dungeonProgressWork { get; set; }
-        [Index(3)] public virtual int beforeDungeonProgress { get; set; }
-        [Index(4)] public virtual int stageMax { get; set; }
-        [Index(5)] public virtual int localID { get; set; }
-        [Index(6)] public virtual int dungeonHighScoreKey { get; set; }
+        [Index(0)]
+        public virtual DungeonID dungeonID { get; set; }
+        [Index(1)]
+        public virtual int stageNum { get; set; }
+        [Index(2)]
+        public virtual Work dungeonProgressWork { get; set; }
+        [Index(3)]
+        public virtual int beforeDungeonProgress { get; set; }
+        [Index(4)]
+        public virtual int stageMax { get; set; }
+        [Index(5)]
+        public virtual int localID { get; set; }
+        [Index(6)]
+        public virtual int dungeonHighScoreKey { get; set; }
     }
 
     public enum DungeonID
@@ -148,25 +210,39 @@ namespace PQSE
     [ZeroFormattable]
     public class BattleBreakData
     {
-        [Index(0)] public virtual bool isExist { get; set; }
-        [Index(1)] public virtual int waveIndex { get; set; }
-        [Index(2)] public virtual IList<int> dropItemNum { get; set; }
-        [Index(3)] public virtual IList<byte[]> dropStoneData { get; set; }
-        [Index(4)] public virtual int dropPassiveStoneNum { get; set; }
-        [Index(5)] public virtual int dropSkillStoneNum { get; set; }
-        [Index(6)] public virtual float timer { get; set; }
-        [Index(7)] public virtual FinishState finishState { get; set; }
-        [Index(8)] public virtual IList<int> initSeeds { get; set; }
-        [Index(9)] public virtual IList<int> dropSeeds { get; set; }
-        [Index(10)] public virtual IList<Member> members { get; set; }
-        [Index(11)] public virtual EndMode endMode { get; set; }
+        [Index(0)]
+        public virtual bool isExist { get; set; }
+        [Index(1)]
+        public virtual int waveIndex { get; set; }
+        [Index(2)]
+        public virtual IList<int> dropItemNum { get; set; }
+        [Index(3)]
+        public virtual IList<byte[]> dropStoneData { get; set; }
+        [Index(4)]
+        public virtual int dropPassiveStoneNum { get; set; }
+        [Index(5)]
+        public virtual int dropSkillStoneNum { get; set; }
+        [Index(6)]
+        public virtual float timer { get; set; }
+        [Index(7)]
+        public virtual FinishState finishState { get; set; }
+        [Index(8)]
+        public virtual IList<int> initSeeds { get; set; }
+        [Index(9)]
+        public virtual IList<int> dropSeeds { get; set; }
+        [Index(10)]
+        public virtual IList<Member> members { get; set; }
+        [Index(11)]
+        public virtual EndMode endMode { get; set; }
 
 
         [ZeroFormattable]
         public class Member
         {
-            [Index(0)] public virtual int hp { get; set; }
-            [Index(1)] public virtual float revivalSecondCount { get; set; }
+            [Index(0)]
+            public virtual int hp { get; set; }
+            [Index(1)]
+            public virtual float revivalSecondCount { get; set; }
         }
     }
 
@@ -189,27 +265,38 @@ namespace PQSE
     [ZeroFormattable]
     public class PotentialStorage
     {
-        [Index(0)] public virtual ILazyDictionary<int, StoneData> potentialDatas { get; set; }
-        [Index(1)] public virtual int dataCapacity { get; set; }
+        [Index(0)]
+        public virtual ILazyDictionary<int, StoneData> potentialDatas { get; set; }
+        [Index(1)]
+        public virtual int dataCapacity { get; set; }
     }
 
     [ZeroFormattable]
     public class StoneData
     {
-        [Index(0)] public virtual IList<byte> stoneData { get; set; }
-        [Index(1)] public virtual int characterStorageIndex { get; set; }
-        [Index(2)] public virtual bool isNew { get; set; }
-        [Index(3)] public virtual long timeTicks { get; set; }
+        [Index(0)]
+        public virtual IList<byte> stoneData { get; set; }
+        [Index(1)]
+        public virtual int characterStorageIndex { get; set; }
+        [Index(2)]
+        public virtual bool isNew { get; set; }
+        [Index(3)]
+        public virtual long timeTicks { get; set; }
     }
 
     [ZeroFormattable]
     public class ConfigData
     {
-        [Index(0)] public virtual Sex playerSex { get; set; }
-        [Index(1)] public virtual Language language { get; set; }
-        [Index(2)] public virtual bool bgmMute { get; set; }
-        [Index(3)] public virtual bool seMute { get; set; }
-        [Index(4)] public virtual bool PushNotice { get; set; }
+        [Index(0)]
+        public virtual Sex playerSex { get; set; }
+        [Index(1)]
+        public virtual Language language { get; set; }
+        [Index(2)]
+        public virtual bool bgmMute { get; set; }
+        [Index(3)]
+        public virtual bool seMute { get; set; }
+        [Index(4)]
+        public virtual bool PushNotice { get; set; }
     }
 
     public enum Sex
@@ -236,21 +323,27 @@ namespace PQSE
     [ZeroFormattable]
     public class FlagWork
     {
-        [Index(0)] public virtual IList<byte> flags { get; set; }
-        [Index(1)] public virtual IList<int> works { get; set; }
+        [Index(0)]
+        public virtual IList<byte> flags { get; set; }
+        [Index(1)]
+        public virtual IList<int> works { get; set; }
     }
 
     [ZeroFormattable]
     public class ItemStorage
     {
-        [Index(0)] public virtual IList<Core> datas { get; set; }
+        [Index(0)]
+        public virtual IList<Core> datas { get; set; }
 
         [ZeroFormattable]
         public class Core
         {
-            [Index(0)] public virtual Item id { get; set; }
-            [Index(1)] public virtual short num { get; set; }
-            [Index(2)] public virtual bool isNew { get; set; }
+            [Index(0)]
+            public virtual Item id { get; set; }
+            [Index(1)]
+            public virtual short num { get; set; }
+            [Index(2)]
+            public virtual bool isNew { get; set; }
         }
     }
 
@@ -284,50 +377,79 @@ namespace PQSE
         public const int DLCGroupMax = 1;
         public const int VisitTotal = 20;
 
-        [Index(0)] public virtual IList<SaveCookingPot> cookingPotList { get; set; }
-        [Index(1)] public virtual ILazyDictionary<int, SaveCharacterData> timeVisitCharacters_1 { get; set; }
-        [Index(2)] public virtual ILazyDictionary<int, SaveCharacterData> cookVisitCharacters_1 { get; set; }
-        [Index(3)] public virtual ILazyDictionary<int, SaveCharacterData> cookVisitCharacters_2 { get; set; }
-        [Index(4)] public virtual ILazyDictionary<int, SaveCharacterData> cookVisitCharacters_3 { get; set; }
-        [Index(5)] public virtual ILazyDictionary<int, SaveCharacterData> cookVisitCharacters_4 { get; set; }
-        [Index(6)] public virtual ILazyDictionary<int, SaveCharacterData> tutorialVisitCharacters_1 { get; set; }
-        [Index(7)] public virtual ILazyDictionary<int, SaveCharacterData> dlcVisitCharacters_1 { get; set; }
+        [Index(0)]
+        public virtual IList<SaveCookingPot> cookingPotList { get; set; }
+        [Index(1)]
+        public virtual ILazyDictionary<int, SaveCharacterData> timeVisitCharacters_1 { get; set; }
+        [Index(2)]
+        public virtual ILazyDictionary<int, SaveCharacterData> cookVisitCharacters_1 { get; set; }
+        [Index(3)]
+        public virtual ILazyDictionary<int, SaveCharacterData> cookVisitCharacters_2 { get; set; }
+        [Index(4)]
+        public virtual ILazyDictionary<int, SaveCharacterData> cookVisitCharacters_3 { get; set; }
+        [Index(5)]
+        public virtual ILazyDictionary<int, SaveCharacterData> cookVisitCharacters_4 { get; set; }
+        [Index(6)]
+        public virtual ILazyDictionary<int, SaveCharacterData> tutorialVisitCharacters_1 { get; set; }
+        [Index(7)]
+        public virtual ILazyDictionary<int, SaveCharacterData> dlcVisitCharacters_1 { get; set; }
     }
 
     [ZeroFormattable]
     public class PokemonMemory
     {
-        [Index(0)] public virtual IList<byte> winFlags { get; set; }
-        [Index(1)] public virtual IList<ushort> scoutCounts { get; set; }
-        [Index(2)] public virtual IList<byte> scoutRareFlags { get; set; }
+        [Index(0)]
+        public virtual IList<byte> winFlags { get; set; }
+        [Index(1)]
+        public virtual IList<ushort> scoutCounts { get; set; }
+        [Index(2)]
+        public virtual IList<byte> scoutRareFlags { get; set; }
     }
 
     [ZeroFormattable]
     public class Misc
     {
-        [Index(0)] public virtual bool isFormated { get; set; }
-        [Index(1)] public virtual int fsGiftTicketNum { get; set; }
-        [Index(2)] public virtual int battery { get; set; }
-        [Index(3)] public virtual IList<int> useSkillIDFlags { get; set; }
-        [Index(4)] public virtual IList<int> battlePokeSeikakuFlags { get; set; }
+        [Index(0)]
+        public virtual bool isFormated { get; set; }
+        [Index(1)]
+        public virtual int fsGiftTicketNum { get; set; }
+        [Index(2)]
+        public virtual int battery { get; set; }
+        [Index(3)]
+        public virtual IList<int> useSkillIDFlags { get; set; }
+        [Index(4)]
+        public virtual IList<int> battlePokeSeikakuFlags { get; set; }
     }
 
     [ZeroFormattable]
     public class PlayerData
     {
-        [Index(0)] public virtual string name { get; set; }
-        [Index(1)] public virtual int termsVersion { get; set; }
-        [Index(2)] public virtual string playerKey { get; set; }
-        [Index(3)] public virtual string deviceUUID { get; set; }
-        [Index(4)] public virtual string supportID { get; set; }
-        [Index(5)] public virtual bool coppaLimit { get; set; }
-        [Index(6)] public virtual bool purchaseCheck { get; set; }
-        [Index(7)] public virtual IList<PurchaseWork> purchaseWorks { get; set; }
-        [Index(8)] public virtual string migrationBackupId { get; set; }
-        [Index(9)] public virtual string migrationBackupKey { get; set; }
-        [Index(10)] public virtual long backupDatetime { get; set; }
-        [Index(11)] public virtual CompensationWork compensationWork { get; set; }
-        [Index(12)] public virtual IList<ID> timeoveredDLC { get; set; }
+        [Index(0)]
+        public virtual string name { get; set; }
+        [Index(1)]
+        public virtual int termsVersion { get; set; }
+        [Index(2)]
+        public virtual string playerKey { get; set; }
+        [Index(3)]
+        public virtual string deviceUUID { get; set; }
+        [Index(4)]
+        public virtual string supportID { get; set; }
+        [Index(5)]
+        public virtual bool coppaLimit { get; set; }
+        [Index(6)]
+        public virtual bool purchaseCheck { get; set; }
+        [Index(7)]
+        public virtual IList<PurchaseWork> purchaseWorks { get; set; }
+        [Index(8)]
+        public virtual string migrationBackupId { get; set; }
+        [Index(9)]
+        public virtual string migrationBackupKey { get; set; }
+        [Index(10)]
+        public virtual long backupDatetime { get; set; }
+        [Index(11)]
+        public virtual CompensationWork compensationWork { get; set; }
+        [Index(12)]
+        public virtual IList<ID> timeoveredDLC { get; set; }
     }
 
     public enum ID
@@ -349,19 +471,27 @@ namespace PQSE
     [ZeroFormattable]
     public class PurchaseWork
     {
-        [Index(0)] public virtual string commonProductId { get; set; }
-        [Index(1)] public virtual string platformTransactionId { get; set; }
-        [Index(2)] public virtual long appTransactionId { get; set; }
-        [Index(3)] public virtual bool validated { get; set; }
-        [Index(4)] public virtual string purchaseLocation { get; set; }
+        [Index(0)]
+        public virtual string commonProductId { get; set; }
+        [Index(1)]
+        public virtual string platformTransactionId { get; set; }
+        [Index(2)]
+        public virtual long appTransactionId { get; set; }
+        [Index(3)]
+        public virtual bool validated { get; set; }
+        [Index(4)]
+        public virtual string purchaseLocation { get; set; }
     }
 
     [ZeroFormattable]
     public class CompensationWork
     {
-        [Index(0)] public virtual State state { get; set; }
-        [Index(1)] public virtual long applyId { get; set; }
-        [Index(2)] public virtual long dataId { get; set; }
+        [Index(0)]
+        public virtual State state { get; set; }
+        [Index(1)]
+        public virtual long applyId { get; set; }
+        [Index(2)]
+        public virtual long dataId { get; set; }
     }
 
     public enum State
@@ -374,61 +504,86 @@ namespace PQSE
     [ZeroFormattable]
     public class Time
     {
-        [Index(0)] public virtual TimeParameter time { get; set; }
-        [Index(1)] public virtual TimeParameter fsGiftTicketTime { get; set; }
-        [Index(2)] public virtual TimeParameter batteryTime { get; set; }
-        [Index(3)] public virtual TimeParameter visitTime { get; set; }
-        [Index(4)] public virtual IList<byte> timePoint { get; set; }
-        [Index(5)] public virtual long lastFsGiftTicketServerTime { get; set; }
+        [Index(0)]
+        public virtual TimeParameter time { get; set; }
+        [Index(1)]
+        public virtual TimeParameter fsGiftTicketTime { get; set; }
+        [Index(2)]
+        public virtual TimeParameter batteryTime { get; set; }
+        [Index(3)]
+        public virtual TimeParameter visitTime { get; set; }
+        [Index(4)]
+        public virtual IList<byte> timePoint { get; set; }
+        [Index(5)]
+        public virtual long lastFsGiftTicketServerTime { get; set; }
     }
 
     [ZeroFormattable]
     public class TimeParameter
     {
-        [Index(0)] public virtual long ticks { get; set; }
+        [Index(0)]
+        public virtual long ticks { get; set; }
     }
 
     [ZeroFormattable]
     public class Goods
     {
-        [Index(0)] public virtual IList<ManageData> hasDatas { get; set; }
-        [Index(1)] public virtual IList<PlacementData> placementDatas { get; set; }
+        [Index(0)]
+        public virtual IList<ManageData> hasDatas { get; set; }
+        [Index(1)]
+        public virtual IList<PlacementData> placementDatas { get; set; }
 
         [ZeroFormattable]
         public class ManageData
         {
-            [Index(0)] public virtual int id { get; set; }
-            [Index(1)] public virtual bool isNew { get; set; }
+            [Index(0)]
+            public virtual int id { get; set; }
+            [Index(1)]
+            public virtual bool isNew { get; set; }
         }
 
         [ZeroFormattable]
         public class PlacementData
         {
-            [Index(0)] public virtual int id { get; set; }
-            [Index(1)] public virtual int goodsID { get; set; }
-            [Index(2)] public virtual byte direction { get; set; }
+            [Index(0)]
+            public virtual int id { get; set; }
+            [Index(1)]
+            public virtual int goodsID { get; set; }
+            [Index(2)]
+            public virtual byte direction { get; set; }
         }
     }
 
     [ZeroFormattable]
     public class Cook
     {
-        [Index(0)] public virtual int recipeOpen { get; set; }
-        [Index(1)] public virtual int volumeOpen { get; set; }
-        [Index(2)] public virtual int lastRecipeID { get; set; }
-        [Index(3)] public virtual int potOpen { get; set; }
+        [Index(0)]
+        public virtual int recipeOpen { get; set; }
+        [Index(1)]
+        public virtual int volumeOpen { get; set; }
+        [Index(2)]
+        public virtual int lastRecipeID { get; set; }
+        [Index(3)]
+        public virtual int potOpen { get; set; }
     }
 
     [ZeroFormattable]
     public class SaveCookingPot
     {
-        [Index(0)] public virtual CookingPotState state { get; set; }
-        [Index(1)] public virtual int cookingProgress { get; set; }
-        [Index(2)] public virtual int cookingOldProgress { get; set; }
-        [Index(3)] public virtual int recipeID { get; set; }
-        [Index(4)] public virtual int rarityID { get; set; }
-        [Index(5)] public virtual int rankID { get; set; }
-        [Index(6)] public virtual int cookTime { get; set; }
+        [Index(0)]
+        public virtual CookingPotState state { get; set; }
+        [Index(1)]
+        public virtual int cookingProgress { get; set; }
+        [Index(2)]
+        public virtual int cookingOldProgress { get; set; }
+        [Index(3)]
+        public virtual int recipeID { get; set; }
+        [Index(4)]
+        public virtual int rarityID { get; set; }
+        [Index(5)]
+        public virtual int rankID { get; set; }
+        [Index(6)]
+        public virtual int cookTime { get; set; }
     }
 
     public enum CookingPotState
