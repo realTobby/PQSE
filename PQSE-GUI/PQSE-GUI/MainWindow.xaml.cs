@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Microsoft.VisualBasic;
 
 namespace PQSE_GUI
 {
@@ -17,6 +18,7 @@ namespace PQSE_GUI
     public partial class MainWindow : Window
     {
         public ViewModel currentView;
+        private static readonly string DEFAULT_KEY = "key.default";
 
         public MainWindow()
         {
@@ -37,11 +39,52 @@ namespace PQSE_GUI
             {
                 selectedFile = chooseSaveFileDialog.FileName;
             }
-            
+
             if (selectedFile != string.Empty)
             {
-                currentView.PathSelectedFile = selectedFile;
-                currentView.Save = new SaveManager(File.ReadAllBytes(currentView.PathSelectedFile));
+                
+                try
+                {
+                    if (File.Exists(DEFAULT_KEY))
+                    {
+                        foreach (var line in File.ReadLines(DEFAULT_KEY))
+                        {
+                            if (line.Length == 16)
+                            {
+                                Encryption.key = line;
+                            }
+                        }
+                    }
+                    
+                    currentView.Save = new SaveManager(File.ReadAllBytes(selectedFile));
+                    currentView.PathSelectedFile = selectedFile;
+                }
+                catch (Exception)
+                {
+                    currentView.Save = null;
+                    string key = Interaction.InputBox("key error", "please input right key", "");
+                    if (key.Length == 16)
+                    {
+                        try
+                        {
+                            Encryption.key = key;
+                            currentView.Save = new SaveManager(File.ReadAllBytes(selectedFile));
+                            currentView.PathSelectedFile = selectedFile;
+                            File.WriteAllText(DEFAULT_KEY, key);
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("key error");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("key error");
+                        return;
+                    }
+                }
+
                 LoadEditable();
             }
         }
@@ -80,7 +123,7 @@ namespace PQSE_GUI
             freshpoke.data.potential = new SaveCharacterPoteintialData();
             freshpoke.data.potential.slotPropertyTypes = new List<sbyte>();
 
-            for(int i = 0; i < 9; i++)
+            for (int i = 0; i < 9; i++)
             {
                 freshpoke.data.potential.slotPropertyTypes.Add(2);
             }
@@ -100,7 +143,7 @@ namespace PQSE_GUI
             Button pokeFace = sender as Button;
             SaveCharacterData clickedPokemon = (SaveCharacterData)pokeFace.Tag;
 
-            
+
 
             int keyPair = currentView.Save.SerializeData.characterStorage.characterDataDictionary.Count() + 1;
 
@@ -122,7 +165,7 @@ namespace PQSE_GUI
             EditPokemon editing = new EditPokemon(poke.Value.data);
 
             editing.ShowDialog();
-            
+
             if (editing.DialogResult.HasValue && editing.DialogResult.Value)
             {
                 result = editing.GetPokeResult();
@@ -151,11 +194,11 @@ namespace PQSE_GUI
                 string baseLink = "icons/pStone/default.png";
 
                 // determines the color fo stone
-                switch(stone.stoneData[56])
+                switch (stone.stoneData[56])
                 {
                     case 0:
-                        
-                            baseLink = "icons/pStone/template/basic.png";
+
+                        baseLink = "icons/pStone/template/basic.png";
 
                         stoneimg.Source = DrawNumberOnStone(stone, baseLink);
 
@@ -185,28 +228,28 @@ namespace PQSE_GUI
                         stoneimg.Source = new BitmapImage(new Uri(baseLink, UriKind.Relative));
                         break;
                     case 10:
-  
+
                         baseLink = "icons/pStone/template/brown.png";
 
                         stoneimg.Source = DrawNumberOnStone(stone, baseLink);
 
                         break;
                     case 20:
-                            baseLink = "icons/pStone/template/silver.png";
+                        baseLink = "icons/pStone/template/silver.png";
 
                         stoneimg.Source = DrawNumberOnStone(stone, baseLink);
 
                         break;
                     case 30:
-                            baseLink = "icons/pStone/template/gold.png";
+                        baseLink = "icons/pStone/template/gold.png";
 
                         stoneimg.Source = DrawNumberOnStone(stone, baseLink);
 
                         break;
                 }
 
-                
-                
+
+
 
                 Button stoneTmp = new Button();
                 stoneTmp.Content = stoneimg;
@@ -234,14 +277,14 @@ namespace PQSE_GUI
             DrawingVisual dv = new DrawingVisual();
             using (DrawingContext dc = dv.RenderOpen())
             {
-                
+
                 dc.DrawImage(src, new Rect(0, 0, src.PixelWidth, src.PixelHeight));
-                
+
                 Image tmpCate = new Image();
                 if (stone.stoneData[44] == 0)
                 {
                     tmpCate.Source = new BitmapImage(new Uri(@"icons/pStone/categor/attack.png", UriKind.Relative));
-                    dc.DrawImage(tmpCate.Source,new Rect(74,46,96,96));
+                    dc.DrawImage(tmpCate.Source, new Rect(74, 46, 96, 96));
                 }
                 if (stone.stoneData[44] == 1)
                 {
@@ -316,7 +359,7 @@ namespace PQSE_GUI
                 }
             }
 
-            
+
 
 
         }
@@ -345,7 +388,7 @@ namespace PQSE_GUI
             {
                 string tmpVal = item.num.ToString();
 
-                switch(item.id)
+                switch (item.id)
                 {
                     case Item.BlueCommon:
                         txtBlueCommon.Text = tmpVal;
@@ -441,6 +484,8 @@ namespace PQSE_GUI
                     case Item.YellowUnCommon:
                         tmpVal = txtYellowUncommon.Text;
                         break;
+                    default:
+                        continue;
                 }
 
                 if (currentView.Save.SerializeData.itemStorage.datas.Where(x => x.id == item.id).FirstOrDefault() != null)
@@ -453,26 +498,26 @@ namespace PQSE_GUI
                     addItem.num = (short)Convert.ToInt32(tmpVal);
                     currentView.Save.SerializeData.itemStorage.datas.Add(addItem);
                 }
-            }                   
+            }
         }
 
-            private void btnExportSav_Click(object sender, RoutedEventArgs e)
+        private void btnExportSav_Click(object sender, RoutedEventArgs e)
         {
-            if(currentView.Save != null)
+            if (currentView.Save != null)
             {
                 SaveEverything();
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 if (saveFileDialog.ShowDialog() == true)
                 {
-                    if(saveFileDialog.FileName != string.Empty)
+                    if (saveFileDialog.FileName != string.Empty)
                     {
                         File.WriteAllBytes(saveFileDialog.FileName, currentView.Save.Export());
                         MessageBox.Show("Successfully exported .sav!");
                     }
-                    
+
                 }
             }
-            
+
         }
 
         private void savePokemonData(object sender, RoutedEventArgs e)
@@ -540,7 +585,7 @@ namespace PQSE_GUI
         {
             IList<SaveCookingPot> potList = currentView.Save.SerializeData.visitCharacter.cookingPotList;
             int tmpindx = 0;
-            foreach(SaveCookingPot item in currentView.Save.SerializeData.visitCharacter.cookingPotList)
+            foreach (SaveCookingPot item in currentView.Save.SerializeData.visitCharacter.cookingPotList)
             {
                 SaveCookingPot editItem = item;
 
