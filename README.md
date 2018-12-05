@@ -10,8 +10,6 @@ Pokemon Quest Save Editor
 I am not responsible for any damage you do to your Switch or Save file. Use this program at your own risk.
 Always have a backup of your savefile!
 
-Interested? Check the wiki for a How to: https://github.com/xSillusx/PQSE/wiki
-
 
 Credits:
 - @xSillusx - Original Author
