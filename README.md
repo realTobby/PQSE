@@ -11,9 +11,9 @@ Interested? Check the wiki for a How to: https://github.com/xSillusx/PQSE/wiki
 
 
 Credits:
-- @xSillusx - The original author of this project!
+- @xSillusx - Original Author
 
-- @TheAlexBarney&@moosehunter - Code for En/De/cryption, De/Se/rialization of the savestrucutre and explaining!
+- @TheAlexBarney & @moosehunter - code for getting hands on the save structure
 
 - @GBATemp users - very helpful information!
 
