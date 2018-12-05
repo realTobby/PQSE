@@ -16,7 +16,7 @@ Credits:
 
 - @TheAlexBarney & @moosehunter - code for getting hands on the save structure
 
-- @GBATemp users - very helpful information!
+- @GBATempUsers - very helpful information!
 
 - @shearx, @kazzaluis, @AKCore, @pmsmall - provided help to improve the application
 
