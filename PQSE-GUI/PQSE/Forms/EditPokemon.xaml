@@ -1,0 +1,83 @@
+﻿<Window x:Class="PQSE_GUI.EditPokemon"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PQSE_GUI"
+        mc:Ignorable="d"
+        Title="EditPokemon" Height="450" Width="800">
+    <StackPanel>
+        <Button Content="Save Pokemon" Click="Button_Click" />
+        <TabControl>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="General"/>
+                </TabItem.Header>
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Pokemon Species:" />
+                    <ComboBox x:Name="comboAllPoke"></ComboBox>
+
+                    <Label Content="Name: "/>
+                    <TextBox x:Name="pokemonName"/>
+
+                    <Label Content="Level: "/>
+                    <TextBox x:Name="pokemonLevel"/>
+
+                    <Label Content="Exp:"/>
+                    <TextBox x:Name="pokemonExp"/>
+
+                    <Label Content="Attack:" />
+                    <TextBox x:Name="pokemonAttack"/>
+
+                    <Label Content="Health:"/>
+                    <TextBox x:Name="pokemonHealth"/>
+
+                    <Label Content="Shiny:"/>
+                    <CheckBox Name="checkIfShiny" Content="is shiny" IsEnabled="false"/>
+                    <Button Name="setToShiny" Content="Set Shiny" Click="setToShiny_Click"/>
+
+                </StackPanel>
+
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="PStones"/>
+                </TabItem.Header>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+
+                    <ComboBox x:Name="pStone0" Grid.Column="0" Grid.Row="0" Height="50" Width="100" Margin="20"></ComboBox>
+                    <ComboBox x:Name="pStone1" Grid.Column="1" Grid.Row="0" Height="50" Width="100"  Margin="20"></ComboBox>
+                    <ComboBox x:Name="pStone2" Grid.Column="2" Grid.Row="0" Height="50" Width="100"  Margin="20"></ComboBox>
+
+                    <ComboBox x:Name="pStone3" Grid.Column="0" Grid.Row="1" Height="50" Width="100" Margin="20"></ComboBox>
+                    <ComboBox x:Name="pStone4" Grid.Column="1" Grid.Row="1" Height="50" Width="100" Margin="20"></ComboBox>
+                    <ComboBox x:Name="pStone5" Grid.Column="2" Grid.Row="1" Height="50" Width="100" Margin="20"></ComboBox>
+
+                    <ComboBox x:Name="pStone6" Grid.Column="0" Grid.Row="2" Height="50" Width="100" Margin="20"></ComboBox>
+                    <ComboBox x:Name="pStone7" Grid.Column="1" Grid.Row="2" Height="50" Width="100" Margin="20"></ComboBox>
+                    <ComboBox x:Name="pStone8" Grid.Column="2" Grid.Row="2" Height="50" Width="100" Margin="20"></ComboBox>
+
+                </Grid>
+
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Attack(s)"/>
+                </TabItem.Header>
+                <ListBox Name="attacksOnThisPoke" />
+            </TabItem>
+        </TabControl>
+    </StackPanel>
+</Window>
