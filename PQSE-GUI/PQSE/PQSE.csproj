@@ -86,6 +86,7 @@
       <DependentUpon>EditStone.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\Encryption.cs" />
+    <Compile Include="Logic\PQSE_LOGIC.cs" />
     <Compile Include="Logic\SaveManager.cs" />
     <Compile Include="Logic\SaveTypes.cs" />
     <Compile Include="Forms\MainWindow.xaml.cs">
@@ -94,6 +95,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logic\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

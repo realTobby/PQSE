@@ -27,7 +27,6 @@ namespace PQSE_GUI
 
         private void saveStone_Click(object sender, RoutedEventArgs e)
         {
-            int nVal = 0;
             int resultVal = 0;
 
             int numba = Convert.ToInt32(txt_stoneVal.Text);
