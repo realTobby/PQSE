@@ -2,7 +2,6 @@
 
 namespace PQSE
 {
-
     public class PQSE_LOGIC
     {
         public ViewModel CurrentView;
@@ -24,7 +23,6 @@ namespace PQSE
             CurrentView.LoadedSave = new SaveManager(System.IO.File.ReadAllBytes(selectedFile));
 
             CurrentView.PokemonStorage = CurrentView.LoadedSave.SerializeData.characterStorage.characterDataDictionary;
-
         }
 
         public void ExportSave()
@@ -38,13 +36,8 @@ namespace PQSE
                     {
                         System.IO.File.WriteAllBytes(saveFileDialog.FileName, CurrentView.LoadedSave.Export());
                     }
-
                 }
             }
         }
-
-
-
-
     }
 }
