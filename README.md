@@ -12,7 +12,7 @@ Always have a backup of your savefile!
 
 
 Credits:
-- @xSillusx - Original Author
+- @realTobby (xSillusx) - Original Author
 
 - @TheAlexBarney & @moosehunter - code for getting hands on the save structure
 
